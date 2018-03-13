@@ -1,6 +1,11 @@
 # map-side-bar
+## Credits
+This repository is based on a pre-existing front-end capstone project. Credit due to Paolo: 
+Source Repository: https://github.com/bamboo-connection/map-side-bar 
+Owner: https://github.com/leetster0
+
 ## Purpose
-This service forms a part of the WeGot food review website. It renders basic information about a restaurant, including the opening hours, address, phone number, and links to website and to google maps for directions. In addition, the service renders a map centered on the location of the restaurant, with a labeled marker.
+This service forms a part of the marZagat food review website. It renders basic information about a restaurant, including the opening hours, address, phone number, and links to website and to google maps for directions. In addition, the service renders a map centered on the location of the restaurant, with a labeled marker.
 
 ## Description
 The service is composed of a server, a  client, and a database.

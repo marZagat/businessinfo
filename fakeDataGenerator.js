@@ -1,6 +1,5 @@
 const faker = require('faker');
 
-// make fake hours data array
 const makeFakeHoursData = () => {
   const fakeHoursData = {
     'periods': [],
@@ -26,9 +25,6 @@ const makeFakeHoursData = () => {
     fakeHoursData['periods'].push(fakeDailyHours);
 
     const convertHours = (militaryHour) => {
-      // convert string to number
-      // modulo number by 12
-      // convert back to string
       let hour = parseInt(militaryHour);
       if (hour > 12) {
         hour = hour - 12;
@@ -46,26 +42,26 @@ const makeFakeRestaurant = (id) => {
   const url = faker.internet.url();
   const fakeHoursData = makeFakeHoursData();
   const fakeRestaurant = {
-    result: {
-      place_id: id,
-      name: faker.company.companyName(),
-      formatted_address: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
-      international_phone_number: faker.phone.phoneNumber(),
-      website: url,
+    "result": {
+      "place_id": id,
+      "name": faker.company.companyName(),
+      "formatted_address": `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
+      "international_phone_number": faker.phone.phoneNumber(),
+      "website": url,
       // do i need to repeat this? seems like a good thing to take out
-      url: url,
-      opening_hours: {
+      "url": url,
+      "opening_hours": {
         // make this more realistic
         // for now get random open_now, but ultimately this logic should be on front end and deleted from db
-        open_now: faker.random.boolean(),
-        periods: fakeHoursData.periods,
+        "open_now": faker.random.boolean(),
+        "periods": fakeHoursData.periods,
         // between periods and weekday test, info is redundant
-        weekday_text: fakeHoursData.weekdayText
+        "weekday_text": fakeHoursData.weekdayText
       },
-      geometry: {
-        location: {
-          lat: faker.address.latitude(),
-          lng: faker.address.longitude()
+      "geometry": {
+        "location": {
+          "lat": faker.address.latitude(),
+          "lng": faker.address.longitude()
         }
       }
     }
@@ -74,17 +70,11 @@ const makeFakeRestaurant = (id) => {
 }
 
 const fakeRestaurants = [];
-
 const generateFakeRestaurantData = (ids) => {
-  for (let i = 1; i <= ids; i++) {
+  for (let i = 0; i < ids; i++) {
     fakeRestaurants.push(makeFakeRestaurant(i));
   }
 }
-
-// works with 100000, seems to break or at least take more than 4 minutes on 1000000
 generateFakeRestaurantData(100);
-
-console.log(fakeRestaurants[0].result.opening_hours.periods);
-console.log(fakeRestaurants[0].result.opening_hours)
 
 module.exports = fakeRestaurants;

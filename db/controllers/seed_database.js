@@ -1,5 +1,7 @@
-var data = require('../../restaurants_data.js');
+var data = require('../../fakeDataGenerator.js');
 var database = require('../models/restaurant.js');
+
+console.log(data[0]);
 
 database.insert(data)
   .then((response) => {

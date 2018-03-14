@@ -5,7 +5,7 @@ var db = mongoose.connect('mongodb://' + databaseHost + '/businessinfo');
 
 var restaurantSchema = mongoose.Schema({
   result: {
-    place_id: { type: String, unique: true },
+    place_id: { type: Number, unique: true },
     name: String,
     formatted_address: String,
     international_phone_number: String,

@@ -16,10 +16,11 @@ app.options((req, res) => {
   res.send('OK');
 });
 
-// app.use('/', express.static(path.resolve(__dirname, '../client/dist/')));
+/* Server expects /restaurants/:id (i.e. ChIJUcXYWWGAhYARmjMY2bJAG2s) */
 
-// app.get('/', (req, res) => {
-//   res.redirect('/restaurants/ChIJUcXYWWGAhYARmjMY2bJAG2s/');
+// app.use('/', (req, res, next) => {
+//   res.redirect('/restaurants/ChIJUcXYWWGAhYARmjMY2bJAG2s');
+//   next();
 // });
 
 app.get('/bundle.js', (req, res) => {
@@ -28,7 +29,7 @@ app.get('/bundle.js', (req, res) => {
 
 app.use('/restaurants', restaurantsRouter);
 
-// app.use('/api/restaurants', restaurantsApiRouter);
+app.use('/api/restaurants', restaurantsApiRouter);
 
 
 

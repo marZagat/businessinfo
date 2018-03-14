@@ -1,21 +1,18 @@
 const faker = require('faker');
 const Restaurant = require('./db/models/restaurant');
 
-// make empty restaurants array
-const fakeRestaurants = [];
-
 // make function to build restaurant with fake data
-const makeFakeRestaurant = () => {
-  const companyName = faker.company.companyName();
+const makeFakeRestaurant = (id) => {
+  const url = faker.internet.url();
   const fakeRestaurant = {
     result: {
-      place_id: Math.floor(Math.random() * 10000000),
+      place_id: id,
       name: faker.company.catchPhrase(),
       formatted_address: `${faker.address.streetAddress()} ${faker.address.city()} ${faker.address.stateAbbr()} ${faker.address.zipCode()} ${faker.address.country()}`,
       international_phone_number: faker.phone.phoneNumber(),
-      website: `www.${companyName}.com`,
+      website: url,
       // do i need to repeat this?
-      url: `www.${companyName}.com`,
+      url: url,
       opening_hours: {
         open_now: faker.random.boolean(),
         periods: [
@@ -50,9 +47,19 @@ const makeFakeRestaurant = () => {
       }
     }
   }
+  return fakeRestaurant;
 }
 
-// loop through to a number and add it to the restaurants array
+const fakeRestaurants = [];
 
-// 
+const generateFakeRestaurantData = (ids) => {
+  for (let i = 1; i <= ids; i++) {
+    fakeRestaurants.push(makeFakeRestaurant(i));
+  }
+}
+
+// works with 100000, seems to break or at least take more than 4 minutes on 1000000
+generateFakeRestaurantData(1000000);
+
+console.log(fakeRestaurants);
 

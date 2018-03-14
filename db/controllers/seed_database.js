@@ -1,16 +1,18 @@
 var data = require('../../fakeDataGenerator.js');
 var database = require('../models/restaurant.js');
+const mongoose = database.mongoose;
+const insert = database.insert;
 
-database.insert(data)
-  .then((response) => {
-    database.mongoose.disconnect();
-  })
-  .catch((err) => {
-    console.error('Failed to seed database');
-    console.error('Error Name:', err.name);
-    console.error('Error Message:', err.message);
-    database.mongoose.disconnect();
-  });
+// database.insert(data)
+//   .then((response) => {
+//     database.mongoose.disconnect();
+//   })
+//   .catch((err) => {
+//     console.error('Failed to seed database');
+//     console.error('Error Name:', err.name);
+//     console.error('Error Message:', err.message);
+//     database.mongoose.disconnect();
+//   });
 
 // build insert function with async await
 // try using async await to drop database and then insert data
@@ -19,9 +21,11 @@ database.insert(data)
 // wait until done
 // batch another, and repeat
 
-// async seedDatabase = () => {
-//   await database.dropDatabase();
-//   await database.insert(data);
-// };
+async function seedDatabase() {
+  await mongoose.connection.dropDatabase();
+  console.log('db dropped');
+  await insert(data);
+  mongoose.disconnect();
+};
 
-// seedDatabase().catch(error => console.error(error.stack));
+seedDatabase().catch(error => console.error(error.stack));

@@ -6,13 +6,13 @@ const makeFakeHoursData = () => {
     'periods': [],
     'weekdayText': []
   };
-  const openTimes = ['06', '07', '08', '09', '10', '11', '12', '13', '14'];
+  const openTimes = ['06', '07', '08', '09', '10', '11'];
   const closeTimes = ['18', '19', '20', '21', '22', '23'];
   const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
   for (let i = 0; i < 7; i++) {
     let closeTime = closeTimes[Math.floor(Math.random() * 5)];
-    let openTime = openTimes[Math.floor(Math.random() * 7)];
+    let openTime = openTimes[Math.floor(Math.random() * 5)];
     let fakeDailyHours = {
       close: {
         day: i,
@@ -30,7 +30,9 @@ const makeFakeHoursData = () => {
       // modulo number by 12
       // convert back to string
       let hour = parseInt(militaryHour);
-      hour = hour % 12;
+      if (hour > 12) {
+        hour = hour - 12;
+      }
       return hour.toString();
     }
     fakeHoursData['weekdayText'].push(`${weekdays[i]}: ${convertHours(openTime)}:00 AM - ${convertHours(closeTime)}:00 PM`);
@@ -82,6 +84,7 @@ const generateFakeRestaurantData = (ids) => {
 // works with 100000, seems to break or at least take more than 4 minutes on 1000000
 generateFakeRestaurantData(100);
 
-console.log(fakeRestaurants[0].result.opening_hours);
+console.log(fakeRestaurants[0].result.opening_hours.periods);
+console.log(fakeRestaurants[0].result.opening_hours)
 
 module.exports = fakeRestaurants;

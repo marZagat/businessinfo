@@ -18,11 +18,6 @@ app.options((req, res) => {
 
 /* Server expects /restaurants/:id (i.e. ChIJUcXYWWGAhYARmjMY2bJAG2s) */
 
-// app.use('/', (req, res, next) => {
-//   res.redirect('/restaurants/ChIJUcXYWWGAhYARmjMY2bJAG2s');
-//   next();
-// });
-
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.resolve('client/dist/bundle.js'));
 });

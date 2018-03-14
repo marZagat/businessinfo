@@ -16,13 +16,19 @@ app.options((req, res) => {
   res.send('OK');
 });
 
+// app.use('/', express.static(path.resolve(__dirname, '../client/dist/')));
+
+// app.get('/', (req, res) => {
+//   res.redirect('/restaurants/ChIJUcXYWWGAhYARmjMY2bJAG2s/');
+// });
+
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.resolve('client/dist/bundle.js'));
 });
 
 app.use('/restaurants', restaurantsRouter);
 
-app.use('/api/restaurants', restaurantsApiRouter);
+// app.use('/api/restaurants', restaurantsApiRouter);
 
 
 

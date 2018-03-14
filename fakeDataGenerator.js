@@ -76,6 +76,6 @@ const generateFakeRestaurantData = (ids) => {
     fakeRestaurants.push(makeFakeRestaurant(i));
   }
 }
-generateFakeRestaurantData(100);
+generateFakeRestaurantData(1000);
 
 module.exports = fakeRestaurants;

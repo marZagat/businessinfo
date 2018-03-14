@@ -44,7 +44,7 @@ var find = (queryObj) => {
 };
 
 var insert = (documents) => {
-  return Restaurant.insertMany(documents);
+  return Restaurant.insertMany(documents);;
 };
 
 var remove = (queryObj) => {

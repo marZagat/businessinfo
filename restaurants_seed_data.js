@@ -59,7 +59,7 @@ const generateFakeRestaurantData = (ids) => {
 }
 
 // works with 100000, seems to break or at least take more than 4 minutes on 1000000
-generateFakeRestaurantData(1000000);
+generateFakeRestaurantData(10000);
 
 console.log(fakeRestaurants);
 

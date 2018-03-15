@@ -16,6 +16,8 @@ app.options((req, res) => {
   res.send('OK');
 });
 
+/* Server expects /restaurants/:id (i.e. ChIJUcXYWWGAhYARmjMY2bJAG2s) */
+
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.resolve('client/dist/bundle.js'));
 });

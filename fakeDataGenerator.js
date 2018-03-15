@@ -70,12 +70,12 @@ const makeFakeRestaurant = (id) => {
   return fakeRestaurant;
 }
 
-const fakeRestaurants = [];
+// const fakeRestaurants = [];
 const generateFakeRestaurantData = (ids) => {
   for (let i = 0; i < ids; i++) {
     fakeRestaurants.push(makeFakeRestaurant(i));
   }
 }
-generateFakeRestaurantData(1000);
+// generateFakeRestaurantData(1000);
 
-module.exports = fakeRestaurants;
+module.exports = makeFakeRestaurant;

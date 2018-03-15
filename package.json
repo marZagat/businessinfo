@@ -1,7 +1,7 @@
 {
-  "name": "map-side-bar",
+  "name": "businessinfo",
   "version": "1.0.0",
-  "description": "info sidebar with a map for WeGot restaurant review website",
+  "description": "business info sidebar with a map for marZagat restaurant review website",
   "main": "server/index.js",
   "scripts": {
     "database": "mongod",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/bamboo-connection/map-side-bar.git"
   },
-  "author": "Paolo Z. Roxas",
+  "author": "David Seidenberg - inherited from project by Paolo Z. Roxas",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bamboo-connection/map-side-bar/issues"

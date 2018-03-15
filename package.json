@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "database": "mongod",
-    "seed": "node db/controllers/seedDatabase.js",
+    "seed": "node db/data/seedDatabase.js",
     "test": "jest",
     "react-dev": "webpack --watch",
     "start": "node server/index.js",

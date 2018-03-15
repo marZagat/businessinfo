@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+const mongoose = require('mongoose');
+// mongoose.Promise = require('bluebird');
 databaseHost = process.env.DATABASE_HOST || 'localhost';
-var db = mongoose.connect('mongodb://' + databaseHost + '/businessinfo');
+const db = mongoose.connect('mongodb://' + databaseHost + '/businessinfo');
 
-var restaurantSchema = mongoose.Schema({
+const restaurantSchema = mongoose.Schema({
   result: {
     place_id: { type: String, unique: true },
     name: String,
@@ -36,22 +36,22 @@ var restaurantSchema = mongoose.Schema({
   }
 });
 
-var Restaurant = mongoose.model('Restaurant', restaurantSchema);
+const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
 
-var find = (queryObj) => {
+const find = (queryObj) => {
   return Restaurant.find(queryObj);
 };
 
-var insert = (documents) => {
+const insert = (documents) => {
   return Restaurant.insertMany(documents);
 };
 
-var remove = (queryObj) => {
+const remove = (queryObj) => {
   return Restaurant.remove(queryObj);
 };
 
-var count = (queryObj) => {
+const count = (queryObj) => {
   return Restaurant.count(queryObj);
 };
 

@@ -1,27 +1,9 @@
 const makeFakeRestaurant = require('../../fakeDataGenerator.js');
 const database = require('../models/restaurant.js');
-// const mongoose = database.mongoose;
 const insert = database.insert;
 const MongoClient = require('mongodb').MongoClient;
 
 const url = 'mongodb://localhost:27017';
-
-
-
-
-//*old insert function* 
-// database.insert(data)
-//   .then((response) => {
-//     database.mongoose.disconnect();
-//   })
-//   .catch((err) => {
-//     console.error('Failed to seed database');
-//     console.error('Error Name:', err.name);
-//     console.error('Error Message:', err.message);
-//     database.mongoose.disconnect();
-//   });
-
-
 
 MongoClient.connect(url, (err, client) => {
   const restaurants = client.db('businessinfo').collection('restaurants');
@@ -43,7 +25,7 @@ MongoClient.connect(url, (err, client) => {
       console.log('inserted id ', id);
     }
   
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 10; i++) {
       fakeRestaurants = [];
       generateFakeRestaurantData(10000);
   
@@ -51,13 +33,12 @@ MongoClient.connect(url, (err, client) => {
     }
   
     console.log('database seeded');
-    // mongoose.disconnect();
-    client.close();
+    // client.close();
     console.log('database disconnected');
   };
 
 
-  seedDatabase().catch(error => console.error(error.stack));
+  seedDatabase().then(client.close()).catch(error => console.error(error.stack));
 });
 
 

@@ -1,6 +1,6 @@
 const faker = require('faker');
 
-// *** Realistic Fake Hours Generator *** //
+// *** Fake Hours Data Generator to make restaurant hours more realistic *** //
 const makeFakeHoursData = () => {
   const fakeHoursData = {
     'periods': [],
@@ -25,14 +25,14 @@ const makeFakeHoursData = () => {
     }
     fakeHoursData['periods'].push(fakeDailyHours);
 
-    const convertHours = (militaryHour) => {
+    const convertHoursToStandard = (militaryHour) => {
       let hour = parseInt(militaryHour);
       if (hour > 12) {
         hour = hour - 12;
       }
       return hour.toString();
     }
-    fakeHoursData['weekdayText'].push(`${weekdays[i]}: ${convertHours(openTime)}:00 AM - ${convertHours(closeTime)}:00 PM`);
+    fakeHoursData['weekdayText'].push(`${weekdays[i]}: ${convertHoursToStandard(openTime)}:00 AM - ${convertHoursToStandard(closeTime)}:00 PM`);
   }
 
   return fakeHoursData;
@@ -70,13 +70,5 @@ const makeFakeRestaurant = (id) => {
   }
   return fakeRestaurant;
 }
-
-// const fakeRestaurants = [];
-const generateFakeRestaurantData = (ids) => {
-  for (let i = 0; i < ids; i++) {
-    fakeRestaurants.push(makeFakeRestaurant(i));
-  }
-}
-// generateFakeRestaurantData(1000);
 
 module.exports = makeFakeRestaurant;

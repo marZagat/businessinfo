@@ -1,5 +1,6 @@
 const faker = require('faker');
 
+// *** Realistic Fake Hours Generator *** //
 const makeFakeHoursData = () => {
   const fakeHoursData = {
     'periods': [],

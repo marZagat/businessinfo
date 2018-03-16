@@ -10,7 +10,7 @@ This service forms a part of the marZagat food review website. It renders basic 
 ## Description
 The service is composed of a server, a  client, and a database.
 ### Server API
-- A request to the root will redirect to the /restaurants/:id path with a default restaurant id
+- The microservice renders in isolation with a request to the host at path /restaurants/:id with an example restaurant id.
 - Serves static client files in response to a GET request to the /restaurants/:id path
 - It also serves json formatted restaurant data in response to a GET request to the /api/restaurants/:id/sidebar endpoint.
 ### Database

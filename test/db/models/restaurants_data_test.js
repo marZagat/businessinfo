@@ -1,3 +1,51 @@
+{ 
+  "_id" : ObjectId("5aaaccef0f3f270788867fff"), 
+  "result" : { 
+    "place_id" : "15", 
+    "name" : "Doyle, Towne and Blanda", 
+    "formatted_address" : "77265 Theresa Ramp, Moenbury, CA 95323-6068, Monaco", 
+    "international_phone_number" : "994.796.1368", 
+    "website" : "https://earl.info", 
+    "url" : "https://earl.info", 
+    "opening_hours" : { 
+      "open_now" : true, 
+      "periods" : [ 
+        { "close" : { "day" : 0, "time" : "1800" }, "open" : { "day" : 0, "time" : "0900" } }, 
+        { "close" : { "day" : 1, "time" : "1800" }, "open" : { "day" : 1, "time" : "1000" } }, 
+        { "close" : { "day" : 2, "time" : "2200" }, "open" : { "day" : 2, "time" : "0900" } }, 
+        { "close" : { "day" : 3, "time" : "1900" }, "open" : { "day" : 3, "time" : "0700" } }, 
+        { "close" : { "day" : 4, "time" : "2200" }, "open" : { "day" : 4, "time" : "0700" } }, 
+        { "close" : { "day" : 5, "time" : "2200" }, "open" : { "day" : 5, "time" : "0900" } }, 
+        { "close" : { "day" : 6, "time" : "2000" }, "open" : { "day" : 6, "time" : "1000" } } ], 
+      "weekday_text" : [ 
+        "Monday: 9:00 AM - 6:00 PM", 
+        "Tuesday: 10:00 AM - 6:00 PM", 
+        "Wednesday: 9:00 AM - 10:00 PM", 
+        "Thursday: 7:00 AM - 7:00 PM", 
+        "Friday: 7:00 AM - 10:00 PM", 
+        "Saturday: 9:00 AM - 10:00 PM", 
+        "Sunday: 10:00 AM - 8:00 PM" 
+      ] 
+    }
+    "geometry" : { 
+      "location" : { 
+        "lat" : "50.4151", 
+        "lng" : "12.1884" } 
+    } 
+  } 
+};
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
   "html_attributions": [],
   "result": {

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-databaseHost = process.env.DATABASE_HOST || 'localhost';
-const db = mongoose.connect(`mongodb://${  databaseHost  }/businessinfo`);
+
+const databaseHost = process.env.DATABASE_HOST || 'localhost';
+mongoose.connect(`mongodb://${databaseHost}/businessinfo`);
 
 const restaurantSchema = mongoose.Schema({
   place_id: { type: String, unique: true },
@@ -27,13 +28,13 @@ const restaurantSchema = mongoose.Schema({
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
-const find = (queryObj) => Restaurant.find(queryObj);
+const find = queryObj => Restaurant.find(queryObj);
 
-const insert = (documents) => Restaurant.insertMany(documents);
+const insert = documents => Restaurant.insertMany(documents);
 
-const remove = (queryObj) => Restaurant.remove(queryObj);
+const remove = queryObj => Restaurant.remove(queryObj);
 
-const count = (queryObj) => Restaurant.count(queryObj);
+const count = queryObj => Restaurant.count(queryObj);
 
 // database functions
 exports.find = find;

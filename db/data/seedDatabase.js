@@ -12,22 +12,22 @@ MongoClient.connect(url, (err, client) => {
 
     let id = 0;
     let fakeRestaurantsBatch;
-    const batchSize = 10000;
+    const batchSizeSetting = 10000;
 
     const generateFakeRestaurantsBatch = (batchSize) => {
-      for (let i = 0; i < batchSize; i++) {
+      for (let i = 0; i < batchSize; i += 1) {
         fakeRestaurantsBatch.push(makeFakeRestaurant(id));
-        id++;
+        id += 1;
       }
     };
 
     const numBatches = 3;
-    for (let i = 0; i < numBatches; i++) {
+    for (let i = 0; i < numBatches; i += 1) {
       fakeRestaurantsBatch = [];
-      generateFakeRestaurantsBatch(batchSize);
+      generateFakeRestaurantsBatch(batchSizeSetting);
 
       await restaurants.insertMany(fakeRestaurantsBatch);
-      console.log(`Inserted batch ending in id ${id-1} `);
+      console.log(`Inserted batch ending in id ${id - 1} `);
     }
 
     console.log('database seeded');

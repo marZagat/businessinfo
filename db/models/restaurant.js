@@ -9,25 +9,49 @@ const restaurantSchema = mongoose.Schema({
   formatted_address: String,
   international_phone_number: String,
   url: String,
-  opening_hours: {
-    open_now: Boolean,
-    periods: [
-      {
-        close: {
-          day: Number,
-          time: String,
-        },
-        open: {
-          day: Number,
-          time: String,
-        },
+  open_now: Boolean,
+  periods: [
+    {
+      close: {
+        day: Number,
+        time: String,
       },
-    ],
-    weekday_text: [String],
-  },
+      open: {
+        day: Number,
+        time: String,
+      },
+    },
+  ],
+  weekday_text: [String],
   lat: Number,
   lng: Number,
 });
+
+// const restaurantSchema = mongoose.Schema({
+//   place_id: { type: String, unique: true },
+//   name: String,
+//   formatted_address: String,
+//   international_phone_number: String,
+//   url: String,
+//   opening_hours: {
+//     open_now: Boolean,
+//     periods: [
+//       {
+//         close: {
+//           day: Number,
+//           time: String,
+//         },
+//         open: {
+//           day: Number,
+//           time: String,
+//         },
+//       },
+//     ],
+//     weekday_text: [String],
+//   },
+//   lat: Number,
+//   lng: Number,
+// });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 

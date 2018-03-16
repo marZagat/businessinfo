@@ -5,7 +5,7 @@ import { OpeningHours } from './OpeningHours.jsx';
 var InfoList = (props) => {
   var info = {
     openingHours: {
-      data: props.restaurant.opening_hours,
+      data: {open_now: props.restaurant.open_now, periods: props.restaurant.periods, weekday_text: props.restaurant.weekday_text},
       icon: 'fas fa-clock fa-lg',
       link: {url: null, newTab: false}
     },

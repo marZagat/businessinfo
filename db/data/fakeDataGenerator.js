@@ -48,14 +48,12 @@ const makeFakeRestaurant = (id) => {
     "formatted_address": `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
     "international_phone_number": faker.phone.phoneNumber(),
     "url": url,
-    "opening_hours": {
-      // make this more realistic
-      // for now get random open_now, but ultimately this logic should be on front end and deleted from db
-      "open_now": faker.random.boolean(),
-      "periods": fakeHoursData.periods,
-      // between periods and weekday test, info is redundant
-      "weekday_text": fakeHoursData.weekdayText
-    },
+    // make this more realistic
+    // for now get random open_now, but ultimately this logic should be on front end and deleted from db
+    "open_now": faker.random.boolean(),
+    "periods": fakeHoursData.periods,
+    // between periods and weekday test, info is redundant
+    "weekday_text": fakeHoursData.weekdayText,
     "lat": faker.address.latitude(),
     "lng": faker.address.longitude()
   }

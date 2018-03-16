@@ -56,12 +56,8 @@ const makeFakeRestaurant = (id) => {
       // between periods and weekday test, info is redundant
       "weekday_text": fakeHoursData.weekdayText
     },
-    "geometry": {
-      "location": {
-        "lat": faker.address.latitude(),
-        "lng": faker.address.longitude()
-      }
-    }
+    "lat": faker.address.latitude(),
+    "lng": faker.address.longitude()
   }
   return fakeRestaurant;
 }

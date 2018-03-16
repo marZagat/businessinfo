@@ -29,7 +29,7 @@ class App extends React.Component {
       return (
         <div className="sidebar-flexbox-col sidebar-app">
           <InfoList restaurant={this.state.restaurant} />
-          <MapContainer geometry={this.state.restaurant.geometry} />
+          <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng} />
         </div>
       );
     }

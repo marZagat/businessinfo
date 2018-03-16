@@ -44,7 +44,6 @@ const makeFakeRestaurant = (id) => {
   const fakeHoursData = makeFakeHoursData();
   const fakeRestaurant = {
     place_id: id,
-    name: faker.company.companyName(),
     formatted_address: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
     international_phone_number: faker.phone.phoneNumber(),
     url,

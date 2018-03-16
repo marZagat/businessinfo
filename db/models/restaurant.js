@@ -5,7 +5,6 @@ mongoose.connect(`mongodb://${databaseHost}/businessinfo`);
 
 const restaurantSchema = mongoose.Schema({
   place_id: { type: String, unique: true },
-  name: String,
   formatted_address: String,
   international_phone_number: String,
   url: String,

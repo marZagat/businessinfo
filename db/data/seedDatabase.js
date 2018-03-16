@@ -21,7 +21,7 @@ MongoClient.connect(url, (err, client) => {
       }
     };
 
-    const numBatches = 1000;
+    const numBatches = 3;
     for (let i = 0; i < numBatches; i++) {
       fakeRestaurantsBatch = [];
       generateFakeRestaurantsBatch(batchSize);

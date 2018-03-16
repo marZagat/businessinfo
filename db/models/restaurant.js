@@ -4,34 +4,32 @@ databaseHost = process.env.DATABASE_HOST || 'localhost';
 const db = mongoose.connect('mongodb://' + databaseHost + '/businessinfo');
 
 const restaurantSchema = mongoose.Schema({
-  result: {
-    place_id: { type: String, unique: true },
-    name: String,
-    formatted_address: String,
-    international_phone_number: String,
-    website: String,
-    url: String,
-    opening_hours: {
-      open_now: Boolean,
-      periods: [
-        {
-          close: {
-            day: Number,
-            time: String
-          },
-          open: {
-            day: Number,
-            time: String
-          }
+  place_id: { type: String, unique: true },
+  name: String,
+  formatted_address: String,
+  international_phone_number: String,
+  website: String,
+  url: String,
+  opening_hours: {
+    open_now: Boolean,
+    periods: [
+      {
+        close: {
+          day: Number,
+          time: String
+        },
+        open: {
+          day: Number,
+          time: String
         }
-      ],
-      weekday_text: [String]
-    },
-    geometry: {
-      location: {
-        lat: Number,
-        lng: Number
       }
+    ],
+    weekday_text: [String]
+  },
+  geometry: {
+    location: {
+      lat: Number,
+      lng: Number
     }
   }
 });

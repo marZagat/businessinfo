@@ -1,11 +1,11 @@
 {
-  "name": "map-side-bar",
+  "name": "businessinfo",
   "version": "1.0.0",
-  "description": "info sidebar with a map for WeGot restaurant review website",
+  "description": "business info sidebar with a map for marZagat restaurant review website",
   "main": "server/index.js",
   "scripts": {
     "database": "mongod",
-    "seed-database": "node db/controllers/seed_database.js",
+    "seed": "node db/data/seedDatabase.js",
     "test": "jest",
     "react-dev": "webpack --watch",
     "start": "node server/index.js",
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/bamboo-connection/map-side-bar.git"
   },
-  "author": "Paolo Z. Roxas",
+  "author": "David Seidenberg - inherited from project by Paolo Z. Roxas",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bamboo-connection/map-side-bar/issues"
@@ -48,8 +48,10 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
     "google-maps-react": "^1.1.2",
     "jquery": "^3.3.1",
+    "mongodb": "^3.0.4",
     "mongoose": "^5.0.6",
     "morgan": "^1.9.0",
     "react": "^16.2.0",

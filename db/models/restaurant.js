@@ -9,7 +9,6 @@ const restaurantSchema = mongoose.Schema({
   formatted_address: String,
   international_phone_number: String,
   url: String,
-  open_now: Boolean,
   periods: [
     {
       close: {

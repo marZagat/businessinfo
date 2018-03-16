@@ -50,7 +50,6 @@ const makeFakeRestaurant = (id) => {
     "url": url,
     // make this more realistic
     // for now get random open_now, but ultimately this logic should be on front end and deleted from db
-    "open_now": faker.random.boolean(),
     "periods": fakeHoursData.periods,
     // between periods and weekday test, info is redundant
     "weekday_text": fakeHoursData.weekdayText,

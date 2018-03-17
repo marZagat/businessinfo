@@ -6,7 +6,7 @@ const numCPUs = require('os').cpus().length;
 const makeFakeRestaurant = require('./fakeDataGenerator.js');
 
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
-const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 1000;
+const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
 
 const connectToDb = async () => {
   const url = 'mongodb://localhost:27017';

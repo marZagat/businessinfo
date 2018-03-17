@@ -25,7 +25,7 @@ MongoClient.connect(url, (err, client) => {
 
     for (let i = 0; i < numBatches; i += 1) {
       fakeRestaurantsBatch = [];
-      generateFakeRestaurantsBatch(batchSize);
+      generateFakeRestaurantsBatch();
 
       await restaurants.insertMany(fakeRestaurantsBatch);
       console.log(`Inserted batch ending in id ${id - 1} `);

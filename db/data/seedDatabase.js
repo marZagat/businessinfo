@@ -3,8 +3,8 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 1000;
-const numBatches = parseInt(process.env.NUM_BATCHES, 10) || 100;
+const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
+const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 1000;
 
 const url = 'mongodb://localhost:27017';
 const makeFakeRestaurant = require('./fakeDataGenerator.js');
@@ -17,7 +17,7 @@ const connectToDb = async () => {
 };
 
 const indexDb = async (restaurants) => {
-  await restaurants.createIndex( {"result.place_id" : 1} , {unique: true});
+  await restaurants.createIndex( {"place_id" : 1} , {unique: true});
 }
 
 const seedBatch = (minId, maxId, restaurants) => {

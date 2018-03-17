@@ -16,6 +16,10 @@ const connectToDb = async () => {
   return { client, restaurants };
 };
 
+const indexDb = async (restaurants) => {
+  await restaurants.createIndex( {"result.place_id" : 1} , {unique: true});
+}
+
 const seedBatch = (minId, maxId, restaurants) => {
   return new Promise(async (resolve, reject) => {
     const fakeRestaurants = [];
@@ -98,6 +102,19 @@ const createWorkers = () => {
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
   createWorkers();
+  
+  process.on('beforeExit', async () => {
+    try {
+      console.log(`Master ${process.pid} indexing`);
+      const { client, restaurants } = await connectToDb();
+      await indexDb(restaurants);
+      console.log('Done indexing');
+      client.close();
+      process.exit();
+    } catch (error) {
+      console.error(error);
+    }
+  });
 } else {
   const startId = parseInt(process.env.START_ID, 10);
   const endId = parseInt(process.env.END_ID, 10);

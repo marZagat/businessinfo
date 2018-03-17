@@ -1,6 +1,9 @@
 const makeFakeRestaurant = require('./fakeDataGenerator.js');
 const { MongoClient } = require('mongodb');
 
+const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
+const numBatches = parseInt(process.env.BATCH_SIZE, 10) || 1000;
+
 const url = 'mongodb://localhost:27017';
 
 MongoClient.connect(url, (err, client) => {
@@ -12,10 +15,8 @@ MongoClient.connect(url, (err, client) => {
 
     let id = 0;
     let fakeRestaurantsBatch;
-    const batchSizeSetting = parseInt(process.env.BATCH_SIZE, 10) || 10000;
-    const numBatches = parseInt(process.env.BATCH_SIZE, 10) || 1000;
 
-    const generateFakeRestaurantsBatch = (batchSize) => {
+    const generateFakeRestaurantsBatch = () => {
       for (let i = 0; i < batchSize; i += 1) {
         fakeRestaurantsBatch.push(makeFakeRestaurant(id));
         id += 1;
@@ -24,7 +25,7 @@ MongoClient.connect(url, (err, client) => {
 
     for (let i = 0; i < numBatches; i += 1) {
       fakeRestaurantsBatch = [];
-      generateFakeRestaurantsBatch(batchSizeSetting);
+      generateFakeRestaurantsBatch(batchSize);
 
       await restaurants.insertMany(fakeRestaurantsBatch);
       console.log(`Inserted batch ending in id ${id - 1} `);

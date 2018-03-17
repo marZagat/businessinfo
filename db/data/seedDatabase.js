@@ -2,7 +2,7 @@ const makeFakeRestaurant = require('./fakeDataGenerator.js');
 const { MongoClient } = require('mongodb');
 
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
-const numBatches = parseInt(process.env.BATCH_SIZE, 10) || 1000;
+const numBatches = parseInt(process.env.NUM_BATCHES, 10) || 1000;
 
 const url = 'mongodb://localhost:27017';
 

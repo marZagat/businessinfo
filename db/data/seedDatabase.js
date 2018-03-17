@@ -12,7 +12,8 @@ MongoClient.connect(url, (err, client) => {
 
     let id = 0;
     let fakeRestaurantsBatch;
-    const batchSizeSetting = 10000;
+    const batchSizeSetting = parseInt(process.env.BATCH_SIZE, 10) || 10000;
+    const numBatches = parseInt(process.env.BATCH_SIZE, 10) || 1000;
 
     const generateFakeRestaurantsBatch = (batchSize) => {
       for (let i = 0; i < batchSize; i += 1) {
@@ -21,7 +22,6 @@ MongoClient.connect(url, (err, client) => {
       }
     };
 
-    const numBatches = 3;
     for (let i = 0; i < numBatches; i += 1) {
       fakeRestaurantsBatch = [];
       generateFakeRestaurantsBatch(batchSizeSetting);

@@ -5,11 +5,12 @@ const numCPUs = require('os').cpus().length;
 
 const makeFakeRestaurant = require('./fakeDataGenerator.js');
 
+const databaseHost = process.env.DATABASE_HOST || 'localhost:27017';
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
 const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
 
 const connectToDb = async () => {
-  const url = 'mongodb://localhost:27017';
+  const url = `mongodb://${databaseHost}`;
   const client = await MongoClient.connect(url);
   const restaurants = client.db('businessinfo').collection('restaurants');
   return { client, restaurants };
@@ -17,7 +18,7 @@ const connectToDb = async () => {
 
 const indexDb = async (restaurants) => {
   await restaurants.createIndex( {"place_id" : 1} , {unique: true});
-}
+};
 
 const seedBatch = (minId, maxId, restaurants) => {
   return new Promise(async (resolve, reject) => {
@@ -32,13 +33,13 @@ const seedBatch = (minId, maxId, restaurants) => {
       console.error(error);
       reject(error);
     }
-  })
-}
+  });
+};
 
 const logSeedTime = (startTime, startId, endId) => {
   const seedTime = (new Date().getTime() - startTime) / 1000;
   console.log(`Worker ${process.pid} done in ${seedTime} sec: ids ${startId}-${endId -1}`);
-}
+};
 
 const seedDb = async (startId, endId) => {
   const startTime = new Date().getTime();

@@ -16,20 +16,26 @@ const connectDB = async () => {
   console.log('dbConnected');
 }
 
-connectDB();
+const seedDb = async () => {
+  await connectDB();
+  
+}
 
-const restaurantColumns = ['place_id', 'formatted_address', 'international_phone_number', 'url', 'lat', 'lng', 'weekday_text'];
-const csRestaurants = new pgp.helpers.ColumnSet(restaurantColumns, {table: 'restaurants'});
-const fakeRestaurants = [{place_id: '6', formatted_address: '765 Price Canyon Rd', international_phone_number: '805 345 9258', url: 'david.com', lat: 23.4, lng: 45.7, weekday_text: 'sample'}];
-const insertionQueryRestaurants = pgp.helpers.insert(fakeRestaurants, csRestaurants);
+const insertRestaurantBatch = async () => {
+  const restaurantColumns = ['place_id', 'formatted_address', 'international_phone_number', 'url', 'lat', 'lng', 'weekday_text'];
+  const csRestaurants = new pgp.helpers.ColumnSet(restaurantColumns, {table: 'restaurants'});
+  const fakeRestaurants = [{place_id: '6', formatted_address: '765 Price Canyon Rd', international_phone_number: '805 345 9258', url: 'david.com', lat: 23.4, lng: 45.7, weekday_text: 'sample'}];
+  const insertionQueryRestaurants = pgp.helpers.insert(fakeRestaurants, csRestaurants);
 
-db.none(insertionQueryRestaurants)
-  .then(data => {
-    console.log('success');
-  })
-  .catch(error => {
-    console.error(error);
-  });
+  db.none(insertionQueryRestaurants)
+    .then(data => {
+      console.log('success');
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
 
 const hoursColumns = ['restaurant_id', 'weekday', 'open_time', 'close_time'];
 const csHours = new pgp.helpers.ColumnSet(hoursColumns, {table: 'hours'});

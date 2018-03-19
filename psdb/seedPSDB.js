@@ -6,7 +6,7 @@ const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const pgp = require('pg-promise')({});
 
-const makeFakeRestaurant = require('../db/data/fakeDataGenerator');
+const makeFakeData = require('./generateDataPSDB');
 
 const cn = `postgres://${username}:${password}@${host}:${port}/businessinfo`;
 
@@ -17,37 +17,47 @@ const connectDB = async () => {
   console.log('dbConnected');
 };
 
-const insertRestaurantBatch = async () => {
+const insertRestaurantBatch = async (fakeRestaurants) => {
   const restaurantColumns = ['place_id', 'formatted_address', 'international_phone_number', 'url', 'lat', 'lng', 'weekday_text'];
   const csRestaurants = new pgp.helpers.ColumnSet(restaurantColumns, { table: 'restaurants' });
-  const fakeRestaurants = [{
-    place_id: '6', formatted_address: '765 Price Canyon Rd', international_phone_number: '805 345 9258', url: 'david.com', lat: 23.4, lng: 45.7, weekday_text: 'sample',
-  }];
+
   const insertionQueryRestaurants = pgp.helpers.insert(fakeRestaurants, csRestaurants);
 
   await db.none(insertionQueryRestaurants);
   console.log('inserted restaurants');
 };
 
-const insertHoursBatch = async () => {
+const insertHoursBatch = async (fakeHours) => {
   const hoursColumns = ['restaurant_id', 'weekday', 'open_time', 'close_time'];
   const csHours = new pgp.helpers.ColumnSet(hoursColumns, { table: 'hours' });
-  const fakeHours = [{
-    restaurant_id: '6', weekday: 0, open_time: '800', close_time: '1900',
-  }];
   const insertionQueryHours = pgp.helpers.insert(fakeHours, csHours);
 
   await db.none(insertionQueryHours);
   console.log('inserted hours');
 };
 
-const seedDb = async () => {
+const insertBatch = async (batchSize) => {
+  const restaurantsBatch = [];
+  const hoursBatch = [];
+  for (let i = 0; i < batchSize; i += 1) {
+    const { fakeRestaurantRow, fakeHoursRows } = makeFakeData(i);
+    restaurantsBatch.push(fakeRestaurantRow);
+    
+    for (let j = 0; j < fakeHoursRows.length; j += 1) {
+      hoursBatch.push(fakeHoursRows[j]);
+    }
+  }
+
+  insertRestaurantBatch(restaurantsBatch);
+  insertHoursBatch(hoursBatch);
+};
+
+const seedBatch = async () => {
   await connectDB();
-  await insertRestaurantBatch();
-  await insertHoursBatch();
+  await insertBatch(100);
   console.log('postgres database seeded');
 };
 
-seedDb();
+seedBatch();
 
 module.exports = db;

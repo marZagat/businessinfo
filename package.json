@@ -47,6 +47,7 @@
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "google-maps-react": "^1.1.2",

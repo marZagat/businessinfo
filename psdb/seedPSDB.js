@@ -52,12 +52,12 @@ const insertBatch = async (batchSize) => {
   insertHoursBatch(hoursBatch);
 };
 
-const seedBatch = async () => {
+const seedBatch = async (batchSize) => {
   await connectDB();
-  await insertBatch(100);
+  await insertBatch(batchSize);
   console.log('postgres database seeded');
 };
 
-seedBatch();
+seedBatch(1000);
 
 module.exports = db;

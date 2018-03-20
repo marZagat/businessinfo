@@ -7,6 +7,6 @@ const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 
 const client = new pg.Client(`postgres://${username}:${password}@${host}:${port}/businessinfo`);
 client.connect();
-const query = client.query('CREATE TABLE restaurants(place_id TEXT PRIMARY KEY, formatted_address VARCHAR(120), international_phone_number VARCHAR(40), url VARCHAR(40), lat REAL, lng REAL, weekday_text VARCHAR(250))')
+const query = client.query('CREATE TABLE restaurants(place_id TEXT, formatted_address VARCHAR(120), international_phone_number VARCHAR(40), url VARCHAR(40), lat REAL, lng REAL, weekday_text VARCHAR(250))')
   .then(() => client.query('CREATE TABLE hours(restaurant_id TEXT, weekday INTEGER, open_time TEXT, close_time TEXT)'))
   .then(() => client.end());

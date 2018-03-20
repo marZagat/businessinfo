@@ -5,7 +5,7 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
-const numRecords = process.env.NUM_RECORDS || 1000000;
+const numRecords = process.env.NUM_RECORDS || 100000;
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');
@@ -76,8 +76,24 @@ const seedDb = async (numRecords) => {
   }
 };
 
+const indexRestaurants = async () => {
+  const indexRestaurantsQuery = 'ALTER TABLE restaurants ADD UNIQUE (place_id)';
+  await db.none(indexRestaurantsQuery)
+    .then(() => console.log('indexed restaurants'))
+    .catch(error => console.error(error));
+};
+
+const addForeignKeys = async () => {
+  const foreignKeyQuery = 'ALTER TABLE hours ADD CONSTRAINT fk FOREIGN KEY (restaurant_id) REFERENCES restaurants(place_id)';
+  await db.none(foreignKeyQuery)
+    .then(() => console.log('added foreign keys'))
+    .catch(error => console.error(error));
+}
+
 seedDb(numRecords)
   .then(() => console.log('seeded!!'))
+  .then(() => indexRestaurants())
+  .then(() => addForeignKeys())
   .catch(err => console.error(err));
 
 module.exports = db;

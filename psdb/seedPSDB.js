@@ -5,7 +5,7 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
-const numRecords = process.env.NUM_RECORDS || 100000;
+const numRecords = process.env.NUM_RECORDS || 10000000;
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');
@@ -29,7 +29,6 @@ const insertRestaurantBatch = async (fakeRestaurants) => {
   const insertionQueryRestaurants = pgp.helpers.insert(fakeRestaurants, csRestaurants);
 
   await db.none(insertionQueryRestaurants)
-    .then(() => console.log('inserted restaurants'))
     .catch((err) => {
       console.error(err);
     });
@@ -41,7 +40,6 @@ const insertHoursBatch = async (fakeHours) => {
   const insertionQueryHours = pgp.helpers.insert(fakeHours, csHours);
 
   await db.none(insertionQueryHours)
-    .then(() => console.log('inserted hours'))
     .catch((err) => {
       console.error(err);
     });

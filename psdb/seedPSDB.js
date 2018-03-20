@@ -5,7 +5,7 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
-const numRecords = process.env.NUM_RECORDS || 100000;
+const numRecords = process.env.NUM_RECORDS || 10000000;
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');
@@ -88,18 +88,19 @@ const addForeignKeys = async () => {
     .catch(error => console.error(error));
 };
 
-const addIndexToHours = async () => {
-  const indexHoursQuery = 'CREATE INDEX restaurantId_index ON hours(restaurant_id)';
-  await db.none(indexHoursQuery)
-    .then(() => console.log('indexed hours table'))
-    .catch(error => console.error(error));
-};
+const startSeed = Date.now();
 
 seedDb(numRecords)
   .then(() => console.log('seeded!!'))
   .then(() => indexRestaurants())
   .then(() => addForeignKeys())
-  .then(() => addIndexToHours())
+  .then(() => {
+    const endSeed = Date.now();
+    console.log('Seed time: ', endSeed - startSeed, 'ms');
+  })
   .catch(err => console.error(err));
+
+
+
 
 module.exports = db;

@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-const makeFakeRestaurant = require('./generateFlatData.js');
+const generateRestaurant = require('./generateFlatData.js');
 
 const databaseHost = process.env.DATABASE_HOST || 'localhost:27017';
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
@@ -22,12 +22,12 @@ const indexDb = async (restaurants) => {
 
 const seedBatch = (minId, maxId, restaurants) => {
   return new Promise(async (resolve, reject) => {
-    const fakeRestaurants = [];
+    const restaurants = [];
     for (let i = minId; i < maxId; i += 1) {
-      fakeRestaurants.push(makeFakeRestaurant(i));
+      restaurants.push(generateRestaurant(i));
     }
     try {
-      const savedRestaurants = await restaurants.insertMany(fakeRestaurants);
+      const savedRestaurants = await restaurants.insertMany(restaurants);
       resolve(savedRestaurants);
     } catch (error) {
       console.error(error);

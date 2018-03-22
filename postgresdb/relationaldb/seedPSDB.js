@@ -5,13 +5,21 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
+<<<<<<< 2c98b6735784c5df692dde0dc59200bdf9efa81a:postgresdb/relationaldb/seedPSDB.js
 const numRecords = process.env.NUM_RECORDS || 10000000;
 const database = process.env.DATABASE || 'businessinfoflat';
+=======
+const numRecords = process.env.NUM_RECORDS || 100000;
+>>>>>>> Refactor seeds script to successfully seed database with single postgres table:psdb/seedPSDB.js
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');
 
+<<<<<<< 2c98b6735784c5df692dde0dc59200bdf9efa81a:postgresdb/relationaldb/seedPSDB.js
 const cn = `postgres://${username}:${password}@${host}:${port}/${database}`;
+=======
+const cn = `postgres://${username}:${password}@${host}:${port}/businessinfoflat`;
+>>>>>>> Refactor seeds script to successfully seed database with single postgres table:psdb/seedPSDB.js
 
 const db = pgp(cn);
 
@@ -24,7 +32,7 @@ const connectDB = async () => {
 };
 
 const insertRestaurantBatch = async (fakeRestaurants) => {
-  const restaurantColumns = ['place_id', 'formatted_address', 'international_phone_number', 'url', 'lat', 'lng', 'weekday_text'];
+  const restaurantColumns = ['place_id', 'formatted_address', 'international_phone_number', 'url', 'lat', 'lng', 'weekday_text', 'monday_open', 'monday_close', 'tuesday_open', 'tuesday_close', 'wednesday_open', 'wednesday_close', 'thursday_open', 'thursday_close', 'friday_open', 'friday_close', 'saturday_open', 'saturday_close', 'sunday_open', 'sunday_close'];
   const csRestaurants = new pgp.helpers.ColumnSet(restaurantColumns, { table: 'restaurants' });
 
   const insertionQueryRestaurants = pgp.helpers.insert(fakeRestaurants, csRestaurants);
@@ -35,31 +43,14 @@ const insertRestaurantBatch = async (fakeRestaurants) => {
     });
 };
 
-const insertHoursBatch = async (fakeHours) => {
-  const hoursColumns = ['restaurant_id', 'weekday', 'open_time', 'close_time'];
-  const csHours = new pgp.helpers.ColumnSet(hoursColumns, { table: 'hours' });
-  const insertionQueryHours = pgp.helpers.insert(fakeHours, csHours);
-
-  await db.none(insertionQueryHours)
-    .catch((err) => {
-      console.error(err);
-    });
-};
-
 const insertBatch = async (startId) => {
   const restaurantsBatch = [];
-  const hoursBatch = [];
   for (let i = 0; i < batchSize; i += 1) {
-    const { fakeRestaurantRow, fakeHoursRows } = makeFakeData(startId + i);
+    const { fakeRestaurantRow } = makeFakeData(startId + i);
     restaurantsBatch.push(fakeRestaurantRow);
-    
-    for (let j = 0; j < fakeHoursRows.length; j += 1) {
-      hoursBatch.push(fakeHoursRows[j]);
-    }
   }
 
   await insertRestaurantBatch(restaurantsBatch);
-  await insertHoursBatch(hoursBatch);
 };
 
 const seedDb = async (numRecords) => {
@@ -82,26 +73,15 @@ const indexRestaurants = async () => {
     .catch(error => console.error(error));
 };
 
-const addForeignKeys = async () => {
-  const foreignKeyQuery = 'ALTER TABLE hours ADD CONSTRAINT fk FOREIGN KEY (restaurant_id) REFERENCES restaurants(place_id)';
-  await db.none(foreignKeyQuery)
-    .then(() => console.log('added foreign keys'))
-    .catch(error => console.error(error));
-};
-
 const startSeed = Date.now();
 
 seedDb(numRecords)
   .then(() => console.log('seeded!!'))
   .then(() => indexRestaurants())
-  .then(() => addForeignKeys())
   .then(() => {
     const endSeed = Date.now();
     console.log('Seed time: ', endSeed - startSeed, 'ms');
   })
   .catch(err => console.error(err));
-
-
-
-
+  
 module.exports = db;

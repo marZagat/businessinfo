@@ -26,7 +26,7 @@ const makeFakeHoursData = () => {
     fakeHoursData.periods.push(fakeDailyHours);
 
     const convertHoursToStandard = (militaryHour) => {
-      let hour = parseInt(militaryHour);
+      let hour = parseInt(militaryHour, 10);
       if (hour > 12) {
         hour -= 12;
       }
@@ -39,11 +39,11 @@ const makeFakeHoursData = () => {
 };
 
 const makeFakeRestaurant = (id) => {
-  id = id.toString();
+  const stringifiedId = id.toString();
   const url = faker.internet.url();
   const fakeHoursData = makeFakeHoursData();
   const fakeRestaurant = {
-    place_id: id,
+    place_id: stringifiedId,
     formatted_address: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
     international_phone_number: faker.phone.phoneNumber(),
     url,

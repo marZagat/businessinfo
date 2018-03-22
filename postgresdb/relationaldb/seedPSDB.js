@@ -5,12 +5,16 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
+<<<<<<< a0387281d15be71e44dad4d950cbc53f57866c97:postgresdb/relationaldb/seedPSDB.js
 <<<<<<< 2c98b6735784c5df692dde0dc59200bdf9efa81a:postgresdb/relationaldb/seedPSDB.js
 const numRecords = process.env.NUM_RECORDS || 10000000;
 const database = process.env.DATABASE || 'businessinfoflat';
 =======
 const numRecords = process.env.NUM_RECORDS || 100000;
 >>>>>>> Refactor seeds script to successfully seed database with single postgres table:psdb/seedPSDB.js
+=======
+const numRecords = process.env.NUM_RECORDS || 10000000;
+>>>>>>> Change batch size to 10M again:psdb/seedPSDB.js
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');

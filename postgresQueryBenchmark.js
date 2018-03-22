@@ -5,9 +5,10 @@ const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const numberQueries = process.env.NUM_QUERIES || 10000;
+const database = process.env.DATABASE || 'businessinfoflat';
 
 
-const client = new pg.Client(`postgres://${username}:${password}@${host}:${port}/businessinfoflat`);
+const client = new pg.Client(`postgres://${username}:${password}@${host}:${port}/${database}`);
 
 const connectDb = async () => {
   client.connect();

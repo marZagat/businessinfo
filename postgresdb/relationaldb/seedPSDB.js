@@ -6,11 +6,12 @@ const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
 const batchSize = process.env.BATCH_SIZE || 10000;
 const numRecords = process.env.NUM_RECORDS || 10000000;
+const database = process.env.DATABASE || 'businessinfoflat';
 const pgp = require('pg-promise')({});
 
 const makeFakeData = require('./generateDataPSDB');
 
-const cn = `postgres://${username}:${password}@${host}:${port}/businessinfo`;
+const cn = `postgres://${username}:${password}@${host}:${port}/${database}`;
 
 const db = pgp(cn);
 

@@ -1,8 +1,8 @@
 const faker = require('faker');
 
 // *** Fake Hours Data Generator to make restaurant hours more realistic *** //
-const makeFakeHoursData = () => {
-  const fakeHoursData = {
+const generateHoursData = () => {
+  const hoursData = {
     periods: [],
     weekdayText: [],
   };
@@ -13,7 +13,7 @@ const makeFakeHoursData = () => {
   for (let i = 0; i < 7; i += 1) {
     const closeTime = closeTimes[Math.floor(Math.random() * 5)];
     const openTime = openTimes[Math.floor(Math.random() * 5)];
-    const fakeDailyHours = {
+    const dailyHours = {
       close: {
         day: i,
         time: `${closeTime}00`,
@@ -23,7 +23,7 @@ const makeFakeHoursData = () => {
         time: `${openTime}00`,
       },
     };
-    fakeHoursData.periods.push(fakeDailyHours);
+    hoursData.periods.push(dailyHours);
 
     const convertHoursToStandard = (militaryHour) => {
       let hour = parseInt(militaryHour, 10);
@@ -32,27 +32,27 @@ const makeFakeHoursData = () => {
       }
       return hour.toString();
     };
-    fakeHoursData.weekdayText.push(`${weekdays[i]}: ${convertHoursToStandard(openTime)}:00 AM - ${convertHoursToStandard(closeTime)}:00 PM`);
+    hoursData.weekdayText.push(`${weekdays[i]}: ${convertHoursToStandard(openTime)}:00 AM - ${convertHoursToStandard(closeTime)}:00 PM`);
   }
 
-  return fakeHoursData;
+  return hoursData;
 };
 
-const makeFakeRestaurant = (id) => {
+const generateRestaurant = (id) => {
   const stringifiedId = id.toString();
   const url = faker.internet.url();
-  const fakeHoursData = makeFakeHoursData();
-  const fakeRestaurant = {
+  const hoursData = generateHoursData();
+  const restaurant = {
     place_id: stringifiedId,
     formatted_address: `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}, ${faker.address.country()}`,
     international_phone_number: faker.phone.phoneNumber(),
     url,
-    periods: fakeHoursData.periods,
-    weekday_text: fakeHoursData.weekdayText,
+    periods: hoursData.periods,
+    weekday_text: hoursData.weekdayText,
     lat: faker.address.latitude(),
     lng: faker.address.longitude(),
   };
-  return fakeRestaurant;
+  return restaurant;
 };
 
-module.exports = makeFakeRestaurant;
+module.exports = generateRestaurant;

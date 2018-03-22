@@ -40,7 +40,6 @@ const makeFakeHoursData = () => {
 
 const makeFakeRestaurant = (id) => {
   const stringifiedId = id.toString();
-  const url = faker.internet.url();
   const fakeHoursData = makeFakeHoursData();
 
   const makeFakeRestaurant = (restaurantId) => {

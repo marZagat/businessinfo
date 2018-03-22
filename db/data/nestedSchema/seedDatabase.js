@@ -3,7 +3,7 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-const makeFakeRestaurant = require('./fakeDataGenerator.js');
+const makeFakeRestaurant = require('./generateNestedData.js');
 
 const databaseHost = process.env.DATABASE_HOST || 'localhost:27017';
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
@@ -12,12 +12,12 @@ const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
 const connectToDb = async () => {
   const url = `mongodb://${databaseHost}`;
   const client = await MongoClient.connect(url);
-  const restaurants = client.db('businessinfo').collection('restaurants');
+  const restaurants = client.db('businessinfoold').collection('restaurants');
   return { client, restaurants };
 };
 
 const indexDb = async (restaurants) => {
-  await restaurants.createIndex( {"place_id" : 1} , {unique: true});
+  await restaurants.createIndex({ 'result.place_id': 1 }, { unique: true });
 };
 
 const seedBatch = (minId, maxId, restaurants) => {

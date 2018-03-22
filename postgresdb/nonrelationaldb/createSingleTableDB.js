@@ -1,5 +1,6 @@
 require('dotenv').config();
 const pg = require('pg');
+
 const host = process.env.POSTGRES_HOST || 'localhost';
 const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';

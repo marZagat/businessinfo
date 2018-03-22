@@ -12,7 +12,7 @@ const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
 const connectToDb = async () => {
   const url = `mongodb://${databaseHost}`;
   const client = await MongoClient.connect(url);
-  const restaurants = client.db('businessinfo').collection('restaurants');
+  const restaurants = client.db('businessinfoflat').collection('restaurants');
   return { client, restaurants };
 };
 

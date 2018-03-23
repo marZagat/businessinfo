@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   getRestaurantData (id) {
-    axios.get(location.origin + '/api/restaurants/' + id + '/businessinfo')
+    axios.get('http://localhost:3003/api/restaurants/' + id + '/businessinfo')
       .then((response) => {
         console.log('received:', response);
         this.setState({ restaurant: response.data });

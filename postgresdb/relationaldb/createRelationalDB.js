@@ -4,8 +4,9 @@ const host = process.env.POSTGRES_HOST || 'localhost';
 const username = process.env.POSTGRES_USER || 'davidseid';
 const password = process.env.POSTGRES_PW || 'marzagat';
 const port = parseInt(process.env.POSTGRES_PORT, 10) || 5432;
+const database = process.env.DATABASE || 'business_info_postgres_relational';
 
-const client = new pg.Client(`postgres://${username}:${password}@${host}:${port}/businessinfo`);
+const client = new pg.Client(`postgres://${username}:${password}@${host}:${port}/${database}`);
 client.connect();
 const query = client.query(`CREATE TABLE restaurants(
                             place_id TEXT, 

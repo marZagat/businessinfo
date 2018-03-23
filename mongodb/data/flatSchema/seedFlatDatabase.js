@@ -3,31 +3,33 @@ const { MongoClient } = require('mongodb');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
 
-const makeFakeRestaurant = require('./fakeDataGenerator.js');
+const generateRestaurant = require('./generateFlatData.js');
 
 const databaseHost = process.env.DATABASE_HOST || 'localhost:27017';
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
-const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
+const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 100000;
+const database = process.env.DATABASE || 'business_info_mongo_flat';
+const collectionName = process.env.COLLECTION_NAME || 'restaurants';
 
 const connectToDb = async () => {
   const url = `mongodb://${databaseHost}`;
   const client = await MongoClient.connect(url);
-  const restaurants = client.db('businessinfo').collection('restaurants');
-  return { client, restaurants };
+  const collection = client.db(database).collection(collectionName);
+  return { client, collection };
 };
 
-const indexDb = async (restaurants) => {
-  await restaurants.createIndex( {"place_id" : 1} , {unique: true});
+const indexDb = async (collection) => {
+  await collection.createIndex({ place_id: 1 }, { unique: true });
 };
 
-const seedBatch = (minId, maxId, restaurants) => {
+const seedBatch = (minId, maxId, collection) => {
   return new Promise(async (resolve, reject) => {
-    const fakeRestaurants = [];
+    const restaurantRows = [];
     for (let i = minId; i < maxId; i += 1) {
-      fakeRestaurants.push(makeFakeRestaurant(i));
+      restaurantRows.push(generateRestaurant(i));
     }
     try {
-      const savedRestaurants = await restaurants.insertMany(fakeRestaurants);
+      const savedRestaurants = await collection.insertMany(restaurantRows);
       resolve(savedRestaurants);
     } catch (error) {
       console.error(error);
@@ -45,13 +47,13 @@ const seedDb = async (startId, endId) => {
   const startTime = new Date().getTime();
 
   try {
-    const { client, restaurants } = await connectToDb();
+    const { client, collection } = await connectToDb();
 
     // seed in batches up to endId
     for (let i = startId; i < endId; i += batchSize) {
       const batchStart = i;
       const batchEnd = Math.min(i + batchSize, endId);
-      await seedBatch(batchStart, batchEnd, restaurants);
+      await seedBatch(batchStart, batchEnd, collection);
     }
 
     // print out the runtime and close everything
@@ -87,8 +89,8 @@ if (cluster.isMaster) {
   process.on('beforeExit', async () => {
     try {
       console.log(`Master ${process.pid} indexing`);
-      const { client, restaurants } = await connectToDb();
-      await indexDb(restaurants);
+      const { client, collection } = await connectToDb();
+      await indexDb(collection);
       console.log('Done indexing');
       client.close();
       process.exit();

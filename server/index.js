@@ -1,12 +1,13 @@
 require('newrelic');
-var express = require('express');
-var app = express();
+const express = require('express');
 
-var path = require('path');
-var cors = require('cors');
+const app = express();
+
+const path = require('path');
+const cors = require('cors');
 // var morgan = require('morgan');
-var restaurantsRouter = require('./routers/restaurants.js');
-var restaurantsApiRouter = require('./routers/restaurants_api.js');
+const restaurantsRouter = require('./routers/restaurants.js');
+const restaurantsApiRouter = require('./routers/restaurants_api.js');
 
 app.use(cors());
 
@@ -19,8 +20,6 @@ app.get('/bundle.js', (req, res) => {
 app.use('/restaurants', restaurantsRouter);
 
 app.use('/api/restaurants', restaurantsApiRouter);
-
-
 
 var port = process.env.PORT || 3003;
 app.listen(port, () => { console.log('Listening on http://localhost:' + port); });

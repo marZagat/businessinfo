@@ -24,8 +24,10 @@ const getRestaurantById = id => database.find({ place_id: id })
 const getRestaurantByIdCached = (id) => {
   client.exists(id, (err, reply) => {
     if (reply === 1) {
+      console.log('it is in redis');
       return getAsync(id).then(res => JSON.parse(res));
     }
+    console.log('not in redis');
     return database.find({ place_id: id })
       .then((result) => {
         setAsync(id, JSON.stringify(result));
@@ -34,3 +36,4 @@ const getRestaurantByIdCached = (id) => {
   });
 };
 
+module.exports = getRestaurantByIdCached;

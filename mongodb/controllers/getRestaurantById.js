@@ -3,6 +3,7 @@
 // const redis = redisClient(6379, 'localhost');
 const redis = require('redis');
 const { promisify } = require('util');
+const Promise = require('bluebird');
 
 const client = redis.createClient();
 
@@ -22,21 +23,22 @@ const getRestaurantById = id => database.find({ place_id: id })
   .then(result => result[0]);
 
 const getRestaurantByIdCached = (id) => {
-  client.exists(id, (err, reply) => {
-    if (reply === 1) {
-      console.log('it is in redis');
-      // return getAsync(id).then(res => (res));
-      return new Promise((resolve, reject) => {
-        client.get(id)
-      })
-      
-    }
-    console.log('not in redis');
-    return database.find({ place_id: id })
-      .then((result) => {
-        setAsync(id, JSON.stringify(result));
-        return result[0];
-      });
+  return new Promise((resolve, reject) => {
+    client.exists(id, (err, reply) => {
+      if (reply === 1) {
+        console.log('id is in redis');
+        getAsync(id).then((res) => {
+          resolve(JSON.parse(res));
+        });
+      } else {
+        console.log('id not in redis');
+        database.find({ place_id: id })
+          .then((result) => {
+            setAsync(id, JSON.stringify(result));
+            resolve(result[0]);
+          });
+      }
+    })
   });
 };
 

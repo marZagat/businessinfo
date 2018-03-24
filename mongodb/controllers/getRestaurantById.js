@@ -28,7 +28,7 @@ const getRestaurantByIdCached = (id) => {
       if (reply === 1) {
         console.log('id is in redis');
         getAsync(id).then((res) => {
-          resolve(JSON.parse(res));
+          resolve(JSON.parse(res)[0]);
         });
       } else {
         console.log('id not in redis');

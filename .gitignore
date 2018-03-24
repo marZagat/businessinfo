@@ -73,4 +73,4 @@ typings/
 newrelic.js
 
 #redis dump
-dump.rdb
+.rdb

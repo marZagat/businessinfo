@@ -1,10 +1,11 @@
 config:
   target: "http://127.0.0.1:3003"
   http:
-    pool: 
+    timeout: 1
+    pool: 10
   phases: 
-    - duration: 120
-      arrivalRate: 10
+    - duration: 20
+      arrivalRate: 100
   processor: "./randomId.js"
 scenarios:
   - flow:
@@ -12,12 +13,12 @@ scenarios:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomUnpopularId"
-      count: 100
+      count: 1000
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomPopularId"
-      count: 100
+      count: 1000
     weight: 4

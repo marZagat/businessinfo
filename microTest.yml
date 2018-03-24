@@ -5,7 +5,7 @@ config:
     pool: 10
   phases: 
     - duration: 10
-      arrivalRate: 10
+      arrivalRate: 20
   processor: "./randomId.js"
 scenarios:
   - flow:
@@ -13,12 +13,12 @@ scenarios:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomUnpopularId"
-      count: 2000
+      count: 1000
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomPopularId"
-      count: 2000
+      count: 1000
     weight: 4

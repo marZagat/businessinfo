@@ -26,12 +26,10 @@ const getRestaurantByIdCached = (id) => {
   return new Promise((resolve, reject) => {
     client.exists(id, (err, reply) => {
       if (reply === 1) {
-        console.log('id is in redis');
         getAsync(id).then((res) => {
           resolve(JSON.parse(res)[0]);
         });
       } else {
-        console.log('id not in redis');
         database.find({ place_id: id })
           .then((result) => {
             setAsync(id, JSON.stringify(result));

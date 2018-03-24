@@ -4,20 +4,13 @@ var app = express();
 
 var path = require('path');
 var cors = require('cors');
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
+// var morgan = require('morgan');
 var restaurantsRouter = require('./routers/restaurants.js');
 var restaurantsApiRouter = require('./routers/restaurants_api.js');
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(morgan('tiny'));
 
-app.options((req, res) => {
-  res.send('OK');
-});
-
-/* Server expects /restaurants/:id (i.e. ChIJUcXYWWGAhYARmjMY2bJAG2s) */
+// app.use(morgan('tiny'));
 
 app.get('/bundle.js', (req, res) => {
   res.sendFile(path.resolve('client/dist/bundle.js'));

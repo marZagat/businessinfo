@@ -5,11 +5,12 @@
   "main": "server/index.js",
   "scripts": {
     "database": "mongod",
-    "seed": "node db/data/seedDatabase.js",
+    "seed": "node mongodb/data/seedDatabase.js",
     "test": "jest",
+    "build": "webpack -p",
     "react-dev": "webpack --watch",
     "start": "node server/index.js",
-    "docker-start": "DATABASE_HOST=database node db/controllers/seed_database.js && DATABASE_HOST=database node server/index.js"
+    "docker-start": "DATABASE_HOST=database node mongodb/controllers/seed_database.js && DATABASE_HOST=database node server/index.js"
   },
   "repository": {
     "type": "git",

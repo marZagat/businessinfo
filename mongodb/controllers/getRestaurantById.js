@@ -1,14 +1,36 @@
+// const redisClient = require('redis').createClient;
+
+// const redis = redisClient(6379, 'localhost');
 const redis = require('redis');
+const { promisify } = require('util');
 
-const redisClient = redis.createClient();
+const client = redis.createClient();
 
-const redis = redisClient(6379, 'localhost');
+const getAsync = promisify(client.get).bind(client);
+const setAsync = promisify(client.set).bind(client);
+// const existsAsync = promisify(client.exists).bind(client);
+
+
+client.on('error', (err) => {
+  console.error(`Error ${err}`);
+});
+
 
 const database = require('../models/restaurant.js');
 
-const getRestaurantById = (id) => {
-  return database.find({ place_id: id })
-    .then((result) => {
-      return result[0];
-    });
+const getRestaurantById = id => database.find({ place_id: id })
+  .then(result => result[0]);
+
+const getRestaurantByIdCached = (id) => {
+  client.exists(id, (err, reply) => {
+    if (reply === 1) {
+      return getAsync(id).then(res => JSON.parse(res));
+    }
+    return database.find({ place_id: id })
+      .then((result) => {
+        setAsync(id, JSON.stringify(result));
+      })
+      .then(result => result[0]);
+  });
 };
+

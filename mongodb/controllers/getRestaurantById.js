@@ -34,9 +34,9 @@ const getRestaurantByIdCached = (id) => {
     console.log('not in redis');
     return database.find({ place_id: id })
       .then((result) => {
-        return setAsync(id, JSON.stringify(result));
-      })
-      .then(result => result[0]);
+        setAsync(id, JSON.stringify(result));
+        return result[0];
+      });
   });
 };
 

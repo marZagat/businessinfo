@@ -1,14 +1,12 @@
 const redis = require('redis');
 
-const client = redis.createClient();
+const redisClient = redis.createClient();
 
-client.on('connect', () => {
-  console.log('redis connected');
-});
+const redis = redisClient(6379, 'localhost');
 
 const database = require('../models/restaurant.js');
 
-module.exports = (id) => {
+const getRestaurantById = (id) => {
   return database.find({ place_id: id })
     .then((result) => {
       return result[0];

@@ -13,12 +13,12 @@ scenarios:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomUnpopularId"
-      count: 1000
+      count: 2000
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "randomPopularId"
-      count: 1000
+      count: 2000
     weight: 4

@@ -8,21 +8,19 @@
     "redis": "redis-server",
     "seed": "node mongodb/data/seedDatabase.js",
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack -p",
     "react-dev": "webpack --watch",
     "start": "node ./server/server.js",
+    "artillery": "artillery run ./loadTest/microTest.yml",
     "docker-start": "DATABASE_HOST=database node mongodb/controllers/seed_database.js && DATABASE_HOST=database node server/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bamboo-connection/map-side-bar.git"
+    "url": "https://github.com/marZagat/businessinfo"
   },
   "author": "David Seidenberg - inherited from project 'WeGot map-side-bar' by Paolo Z. Roxas",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bamboo-connection/map-side-bar/issues"
-  },
-  "homepage": "https://github.com/bamboo-connection/map-side-bar#readme",
+  "homepage": "https://github.com/marZagat/businessinfo/blob/master/README.md",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",

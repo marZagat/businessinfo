@@ -6,19 +6,19 @@ config:
   phases: 
     - duration: 10
       arrivalRate: 20
-  processor: "./randomId.js"
+  processor: "./loadTestHelpers.js"
 scenarios:
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
-          beforeRequest: "randomUnpopularId"
+          beforeRequest: "getRandomNormalId"
       count: 1000
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
-          beforeRequest: "randomPopularId"
+          beforeRequest: "getRandomPopularId"
       count: 1000
     weight: 4

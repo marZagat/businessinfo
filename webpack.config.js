@@ -15,6 +15,11 @@ const common = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      react: path.resolve('node_modules/react'),
+    },
+  },
 };
 
 const client = {

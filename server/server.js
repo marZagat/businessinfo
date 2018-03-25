@@ -14,6 +14,10 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.resolve('client/dist/bundle.js'));
+});
+
 app.use('/restaurants', restaurantsRouter);
 
 app.use('/api/restaurants', restaurantsApiRouter);

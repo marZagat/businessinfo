@@ -1,4 +1,4 @@
-# map-side-bar
+# Business Info 
 ## Credits
 This repository is based on a pre-existing front-end capstone project. Credit due to Paolo: 
 Source Repository: https://github.com/bamboo-connection/map-side-bar 
@@ -8,7 +8,7 @@ Owner: https://github.com/leetster0
 This service forms a part of the marZagat food review website. It renders basic information about a restaurant, including the opening hours, address, phone number, and links to website and to google maps for directions. In addition, the service renders a map centered on the location of the restaurant, with a labeled marker.
 
 ## Description
-The service is composed of a server, a  client, and a database.
+The service is composed of a server, a client, and a database.
 ### Server API
 - The microservice renders in isolation with a request to the host at path /restaurants/:id with an example restaurant id.
 - Serves static client files in response to a GET request to the /restaurants/:id path
@@ -28,7 +28,7 @@ Takes in a restaurant ID and requests restaurant information from the server. Re
 
 ### Installation
 1. Install dependencies: `npm install`
-2. Build client files: `npm run react-dev`
+2. Build client files: `npm run build`
 3. Start database server: `npm run database`
 4. Seed database: `npm run seed`
 5. Start server: `npm start`

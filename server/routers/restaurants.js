@@ -1,6 +1,6 @@
-var express = require('express');
-var router = express.Router();
-var getRestaurantById = require('../../mongodb/controllers/getRestaurantById.js');
+const express = require('express');
+
+const router = express.Router();
 
 router.use('/:id', express.static('client/dist'));
 

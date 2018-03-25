@@ -7,13 +7,13 @@ class BusinessInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      restaurant: props.restaurant
+      restaurant: props.restaurant,
     };
     this.getRestaurantData(props.id);
   }
 
-  getRestaurantData (id) {
-    axios.get('http://localhost:3003/api/restaurants/' + id + '/businessinfo')
+  getRestaurantData(id) {
+    axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
         console.log('received:', response);
         this.setState({ restaurant: response.data });
@@ -25,14 +25,13 @@ class BusinessInfo extends React.Component {
   render() {
     if (!this.state.restaurant) {
       return <div> Loading Sidebar... </div>;
-    } else {
-      return (
-        <div className="sidebar-flexbox-col sidebar-app">
-          <InfoList restaurant={this.state.restaurant} />
-          <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng} />
-        </div>
-      );
     }
+    return (
+      <div className="sidebar-flexbox-col sidebar-app">
+        <InfoList restaurant={this.state.restaurant} />
+        <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng} />
+      </div>
+    );
   }
 }
 

@@ -20,6 +20,7 @@ const common = {
       react: path.resolve('node_modules/react'),
     },
   },
+  devtool: 'inline-source-map',
 };
 
 const client = {

@@ -9,6 +9,7 @@ require("babel-polyfill");
 class BusinessInfo extends React.Component {
   constructor(props) {
     super(props);
+<<<<<<< 68fc3e49971d0912c1ddcd0c7e7ecb75f8645bbc
 <<<<<<< 784cdd4fe1a8fce4304d7983d3acbd03947a46e6
     this.state = {
       restaurant: this.props.restaurant,
@@ -45,21 +46,29 @@ class BusinessInfo extends React.Component {
 
     // this.getRestaurantData(this.props.id);
 >>>>>>> Removed data fetch from component to try to switch data fetch to proxy server, didn't get it working
+=======
+    this.state = {
+      restaurant: this.props.restaurant
+    };
+
+    this.getRestaurantData(this.props.id);
+>>>>>>> Identified issue with server side rendering. Map component from google-maps-react library not compatible with ssr
   }
 
   // componentDidMount() {
   //   this.getRestaurantData(this.props.id);
   // }
 
-  // getRestaurantData(id) {
-  //   axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
-  //     .then((response) => {
-  //       console.log('received:', response.data);
-  //       this.setState({ restaurant: response.data });
-  //     }).catch((err) => {
-  //       console.error('Failed to fetch restaurant data from server:', err);
-  //     });
-  // }
+  getRestaurantData(id) {
+    axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
+      .then((response) => {
+        console.log('received:', response.data);
+        debugger;
+        this.setState({ restaurant: response.data });
+      }).catch((err) => {
+        console.error('Failed to fetch restaurant data from server:', err);
+      });
+  }
 
   render() {
     if (!this.state.restaurant) {
@@ -67,8 +76,7 @@ class BusinessInfo extends React.Component {
     }
     return (
       <div className="sidebar-flexbox-col sidebar-app">
-        <InfoList restaurant={this.props.restaurant} />
-        <MapContainer lat={this.props.restaurant.lat} lng={this.props.restaurant.lng} />
+        <InfoList restaurant={this.state.restaurant} />
       </div>
     );
   }

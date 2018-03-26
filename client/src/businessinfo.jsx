@@ -12,6 +12,7 @@ class BusinessInfo extends React.Component {
     this.state = {
       restaurant: this.props.restaurant,
     };
+<<<<<<< 8643cf5158339c5d071d0c53f79c1f06edeff0c7
     this.getRestaurantData(props.id);
   }
 
@@ -28,6 +29,9 @@ class BusinessInfo extends React.Component {
     return new Promise((resolve) => {
       resolve(this.setState(state));
     });
+=======
+    getRestaurantData(props.id);
+>>>>>>> Still working on ssr, commit to compare with previous implementation
   }
 
   getRestaurantData(id) {
@@ -53,5 +57,39 @@ class BusinessInfo extends React.Component {
   }
 }
 
-// export { App };
 export default BusinessInfo;
+
+
+//* Attempts to wait for render until after initial data fetch */
+// this.setStateAsync = (state) => {
+//   return new Promise((resolve) => {
+//     this.setState(state, resolve);
+//   });
+// }
+
+// this.getData = async () => {
+//   console.log('this is called inside of component did mount before data catch initiated');
+//   const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
+//   console.log('here is the data', businessInfoData.data);
+//   await this.setStateAsync({ restaurant: businessInfoData.data });
+//   // await this.setState({ restaurant: businessInfoData });
+//   console.log('state has been set');
+// };
+
+// this.getData();
+// }
+
+// async componentWillMount() {
+// console.log('this is called inside of component did mount before data catch initiated');
+// const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
+// console.log('here is the data', businessInfoData);
+// await this.setStateAsync({ restaurant: businessInfoData });
+// // await this.setState({ restaurant: businessInfoData });
+// console.log('state has been set');
+// }
+
+// setStateAsync(state) {
+// return new Promise((resolve) => {
+//   this.setState(state, resolve);
+// });
+// }

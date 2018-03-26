@@ -23,7 +23,7 @@ const common = {
 };
 
 const client = {
-  entry: './client.js',
+  entry: ['babel-polyfill', './client.js'],
   output: {
     path: __dirname + '/public',
     filename: 'app.js',
@@ -31,7 +31,7 @@ const client = {
 };
 
 const server = {
-  entry: './server.js',
+  entry: ['babel-polyfill', './server.js'],
   target: 'node',
   output: {
     path: __dirname + '/public',

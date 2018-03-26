@@ -9,6 +9,7 @@ require("babel-polyfill");
 class BusinessInfo extends React.Component {
   constructor(props) {
     super(props);
+<<<<<<< 784cdd4fe1a8fce4304d7983d3acbd03947a46e6
     this.state = {
       restaurant: this.props.restaurant,
     };
@@ -37,21 +38,28 @@ class BusinessInfo extends React.Component {
 
     this.getRestaurantData(this.props.id);
 >>>>>>> Saving version that mostly works but fails to fetch data prior to render, going to experiment with removing fetch from component
+=======
+    // this.state = {
+    //   restaurant: this.props.restaurant,
+    // };
+
+    // this.getRestaurantData(this.props.id);
+>>>>>>> Removed data fetch from component to try to switch data fetch to proxy server, didn't get it working
   }
 
   // componentDidMount() {
   //   this.getRestaurantData(this.props.id);
   // }
 
-  getRestaurantData(id) {
-    axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
-      .then((response) => {
-        console.log('received:', response.data);
-        this.setState({ restaurant: response.data });
-      }).catch((err) => {
-        console.error('Failed to fetch restaurant data from server:', err);
-      });
-  }
+  // getRestaurantData(id) {
+  //   axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
+  //     .then((response) => {
+  //       console.log('received:', response.data);
+  //       this.setState({ restaurant: response.data });
+  //     }).catch((err) => {
+  //       console.error('Failed to fetch restaurant data from server:', err);
+  //     });
+  // }
 
   render() {
     if (!this.state.restaurant) {
@@ -59,8 +67,8 @@ class BusinessInfo extends React.Component {
     }
     return (
       <div className="sidebar-flexbox-col sidebar-app">
-        <InfoList restaurant={this.state.restaurant} />
-        <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng} />
+        <InfoList restaurant={this.props.restaurant} />
+        <MapContainer lat={this.props.restaurant.lat} lng={this.props.restaurant.lng} />
       </div>
     );
   }

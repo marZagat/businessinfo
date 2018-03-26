@@ -63,7 +63,6 @@ class BusinessInfo extends React.Component {
     axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
         console.log('received:', response.data);
-        debugger;
         this.setState({ restaurant: response.data });
       }).catch((err) => {
         console.error('Failed to fetch restaurant data from server:', err);
@@ -77,6 +76,7 @@ class BusinessInfo extends React.Component {
     return (
       <div className="sidebar-flexbox-col sidebar-app">
         <InfoList restaurant={this.state.restaurant} />
+        <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng} />
       </div>
     );
   }

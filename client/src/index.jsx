@@ -10,4 +10,4 @@ if (restaurantId[restaurantId.length - 1] === '/') {
   restaurantId = restaurantId.substring(0, restaurantId.length - 1);
 }
 
-ReactDOM.render(<App restaurantId={restaurantId} restaurant={null}/>, document.getElementById('business-info'));
+ReactDOM.render(<App id={restaurantId} restaurant={null}/>, document.getElementById('business-info'));

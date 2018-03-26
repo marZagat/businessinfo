@@ -15,27 +15,30 @@ class BusinessInfo extends React.Component {
     this.getRestaurantData(props.id);
   }
 
-    setStateAsync(state) {
-      return new Promise((resolve) => {
-        this.setState(state, resolve);
-      });
-    }
-
-    async () => {
-      const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
-      await this.setStateAsync({ restaurant: businessInfoData });
-    }
+  async componentDidMount() {
+    console.log('this is called inside of component did mount before data catch initiated');
+    const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
+    console.log('here is the data', businessInfoData);
+    // await this.setStateAsync({ restaurant: businessInfoData });
+    await this.setState({ restaurant: businessInfoData });
+    console.log('state has been set');
   }
 
-  // getRestaurantData(id) {
-  //   axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
-  //     .then((response) => {
-  //       console.log('received:', response);
-  //       this.setState({ restaurant: response.data });
-  //     }).catch((err) => {
-  //       console.error('Failed to fetch restaurant data from server:', err);
-  //     });
-  // }
+  setStateAsync(state) {
+    return new Promise((resolve) => {
+      resolve(this.setState(state));
+    });
+  }
+
+  getRestaurantData(id) {
+    axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
+      .then((response) => {
+        console.log('received:', response);
+        this.setState({ restaurant: response.data });
+      }).catch((err) => {
+        console.error('Failed to fetch restaurant data from server:', err);
+      });
+  }
 
   render() {
     if (!this.state.restaurant) {

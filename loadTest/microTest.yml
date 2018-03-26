@@ -4,7 +4,7 @@ config:
     timeout: 2
     pool: 10
   phases: 
-    - duration: 10
+    - duration: 20
       arrivalRate: 20
   processor: "./loadTestHelpers.js"
 scenarios:
@@ -13,12 +13,12 @@ scenarios:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "getRandomNormalId"
-      count: 1000
+      count: 100
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "getRandomPopularId"
-      count: 1000
+      count: 100
     weight: 4

@@ -1,19 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import Promise from 'bluebird';
-import styled from 'styled-components';
 
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-
-const BusinessInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
 
 class BusinessInfo extends React.Component {
   constructor(props) {
@@ -67,7 +57,6 @@ class BusinessInfo extends React.Component {
   getRestaurantData(id) {
     axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
-        console.log('received:', response.data);
         this.setState({ restaurant: response.data });
       }).catch((err) => {
         console.error('Failed to fetch restaurant data from server:', err);
@@ -79,49 +68,12 @@ class BusinessInfo extends React.Component {
       return <div> Loading Sidebar... </div>;
     }
     return (
-      // <div className="sidebar-flexbox-col sidebar-app">
-      <BusinessInfoContainer>
+      <div className="sidebar-flexbox-col sidebar-app">
         <InfoList restaurant={this.state.restaurant} />
         <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng}/>
-      </BusinessInfoContainer>
-      // </div>
+      </div>
     );
   }
 }
 
 export default BusinessInfo;
-
-
-//* Attempts to wait for render until after initial data fetch */
-// this.setStateAsync = (state) => {
-//   return new Promise((resolve) => {
-//     this.setState(state, resolve);
-//   });
-// }
-
-// this.getData = async () => {
-//   console.log('this is called inside of component did mount before data catch initiated');
-//   const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
-//   console.log('here is the data', businessInfoData.data);
-//   await this.setStateAsync({ restaurant: businessInfoData.data });
-//   // await this.setState({ restaurant: businessInfoData });
-//   console.log('state has been set');
-// };
-
-// this.getData();
-// }
-
-// async componentWillMount() {
-// console.log('this is called inside of component did mount before data catch initiated');
-// const businessInfoData = await axios.get(`http://localhost:3003/api/restaurants/${this.props.restaurantId}/businessinfo`);
-// console.log('here is the data', businessInfoData);
-// await this.setStateAsync({ restaurant: businessInfoData });
-// // await this.setState({ restaurant: businessInfoData });
-// console.log('state has been set');
-// }
-
-// setStateAsync(state) {
-// return new Promise((resolve) => {
-//   this.setState(state, resolve);
-// });
-// }

@@ -24,7 +24,7 @@ const common = {
 };
 
 const client = {
-  entry: ['babel-polyfill', './client.js'],
+  entry: './client.js',
   output: {
     path: __dirname + '/public',
     filename: 'app.js',
@@ -32,7 +32,7 @@ const client = {
 };
 
 const server = {
-  entry: ['babel-polyfill', './server.js'],
+  entry: './server.js',
   target: 'node',
   output: {
     path: __dirname + '/public',
@@ -45,19 +45,3 @@ module.exports = [
   Object.assign({}, common, client),
   Object.assign({}, common, server),
 ];
-
-// *** OLD WEBPACK ***
-// module.exports = {
-//   entry: "./client/src/index.jsx",
-//   output: {
-//     filename: "./client/dist/bundle.js"
-//   },
-//   module: {
-//     loaders: [
-//       {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
-//       {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
-//       {test: /\.css$/, loader: ['style-loader', 'css-loader']}
-//     ]
-//   },
-//   devtool: "source-map"
-// }

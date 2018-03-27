@@ -1,9 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import Promise from 'bluebird';
+import styled from 'styled-components';
+
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
 require("babel-polyfill");
+
+const BusinessInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-end;
+`;
 
 
 class BusinessInfo extends React.Component {
@@ -55,10 +65,6 @@ class BusinessInfo extends React.Component {
 >>>>>>> Identified issue with server side rendering. Map component from google-maps-react library not compatible with ssr
   }
 
-  // componentDidMount() {
-  //   this.getRestaurantData(this.props.id);
-  // }
-
   getRestaurantData(id) {
     axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
@@ -74,10 +80,12 @@ class BusinessInfo extends React.Component {
       return <div> Loading Sidebar... </div>;
     }
     return (
-      <div className="sidebar-flexbox-col sidebar-app">
+      // <div className="sidebar-flexbox-col sidebar-app">
+      <BusinessInfoContainer>
         <InfoList restaurant={this.state.restaurant} />
         <MapContainer lat={this.state.restaurant.lat} lng={this.state.restaurant.lng}/>
-      </div>
+      </BusinessInfoContainer>
+      // </div>
     );
   }
 }

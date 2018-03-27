@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-require("babel-polyfill");
 
 const BusinessInfoContainer = styled.div`
   display: flex;

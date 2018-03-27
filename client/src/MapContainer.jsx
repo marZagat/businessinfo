@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const Marker = ({ icon }) => <div><img src="http://res.cloudinary.com/madlicorice/image/upload/v1520470825/map_icon_small.png"/></div>;
 
 class SimpleMap extends Component {
   constructor(props) {
@@ -12,23 +12,21 @@ class SimpleMap extends Component {
         lat: this.props.lat,
         lng: this.props.lng,
       },
-      zoom: 11,
+      zoom: 0,
     };
   }
 
   render() {
     return (
-      // Important! Always set the container height explicitly
       <div style={{ height: '320px', width: '280px' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAZeaxvjPuMA8T8pyjr7Fkld8zLYgtn8Mo' }}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >
-          <AnyReactComponent
+          <Marker 
             lat={this.props.lat}
             lng={this.props.lng}
-            text={'Kreyser Avrora'}
           />
         </GoogleMapReact>
       </div>

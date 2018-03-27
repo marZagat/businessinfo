@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+const mapKey = process.env.MAP_KEY;
 
 const Marker = ({ icon }) => <div><img src="http://res.cloudinary.com/madlicorice/image/upload/v1520470825/map_icon_small.png"/></div>;
 
@@ -20,7 +21,7 @@ class SimpleMap extends Component {
     return (
       <div style={{ height: '320px', width: '280px' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAZeaxvjPuMA8T8pyjr7Fkld8zLYgtn8Mo' }}
+          bootstrapURLKeys={{ key: mapKey }}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
         >

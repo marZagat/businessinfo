@@ -27,14 +27,14 @@ Takes in a restaurant ID and requests restaurant information from the server. Re
 - MongoDB
 - Google Maps API key set to MAP_KEY in .env file
 
-### Manual Installation 
+### Manual Setup 
 1. Install dependencies: `npm install`
 2. Build client files: `npm run build`
 3. Start database server: `npm run database`
 4. Seed database: `npm run seed`
 5. Start server: `npm start`
 
-### Docker Installation
+### Docker Setup
 1. Spin up containers: `docker-compose up`
 2. Seed database: `docker exec -it <businessinfo container name> npm run seed`
 

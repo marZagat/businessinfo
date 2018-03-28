@@ -1,14 +1,47 @@
-module.exports = {
-  entry: "./client/src/index.jsx",
-  output: {
-    filename: "./client/dist/bundle.js"
-  },
+const webpack = require('webpack');
+const path = require('path');
+
+const common = {
+  context: __dirname + '/client',
   module: {
     loaders: [
-      {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
-      {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/},
-      {test: /\.css$/, loader: ['style-loader', 'css-loader']}
-    ]
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['react', 'es2015', 'env'],
+        },
+      },
+    ],
   },
-  devtool: "source-map"
-}
+  resolve: {
+    alias: {
+      react: path.resolve('node_modules/react'),
+    },
+  },
+  devtool: 'inline-source-map',
+};
+
+const client = {
+  entry: './client.js',
+  output: {
+    path: __dirname + '/public',
+    filename: 'app.js',
+  },
+};
+
+const server = {
+  entry: './server.js',
+  target: 'node',
+  output: {
+    path: __dirname + '/public',
+    filename: 'app-server.js',
+    libraryTarget: 'commonjs-module',
+  },
+};
+
+module.exports = [
+  Object.assign({}, common, client),
+  Object.assign({}, common, server),
+];

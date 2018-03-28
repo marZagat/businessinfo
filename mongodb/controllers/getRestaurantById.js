@@ -1,30 +1,22 @@
-// const redisClient = require('redis').createClient;
-
-// const redis = redisClient(6379, 'localhost');
 const redis = require('redis');
 const { promisify } = require('util');
 const Promise = require('bluebird');
 
+const database = require('../models/restaurant.js');
+
 const client = redis.createClient();
 
 const getAsync = promisify(client.get).bind(client);
-const setAsync = promisify(client.set).bind(client);
-// const existsAsync = promisify(client.exists).bind(client);
-
+const setexAsync = promisify(client.setex).bind(client);
 
 client.on('error', (err) => {
   console.error(`Error ${err}`);
 });
 
-
-const database = require('../models/restaurant.js');
-
-const getRestaurantById = id => database.find({ place_id: id })
-  .then(result => result[0]);
-
-const getRestaurantByIdCached = (id) => {
+const getRestaurantById = (id) => {
   return new Promise((resolve, reject) => {
     client.exists(id, (err, reply) => {
+      if (err) reject(err);
       if (reply === 1) {
         getAsync(id).then((res) => {
           resolve(JSON.parse(res)[0]);
@@ -32,12 +24,12 @@ const getRestaurantByIdCached = (id) => {
       } else {
         database.find({ place_id: id })
           .then((result) => {
-            setAsync(id, JSON.stringify(result));
+            setexAsync(id, 3600, JSON.stringify(result));
             resolve(result[0]);
           });
       }
-    })
+    });
   });
 };
 
-module.exports = getRestaurantByIdCached;
+module.exports = getRestaurantById;

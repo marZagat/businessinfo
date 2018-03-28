@@ -4,21 +4,21 @@ config:
     timeout: 2
     pool: 10
   phases: 
-    - duration: 10
+    - duration: 20
       arrivalRate: 20
-  processor: "./randomId.js"
+  processor: "./loadTestHelpers.js"
 scenarios:
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
-          beforeRequest: "randomUnpopularId"
-      count: 1000
+          beforeRequest: "getRandomNormalId"
+      count: 100
     weight: 1
   - flow:
     - loop:
       - get:
           url: "/api/restaurants/{{ id }}/businessinfo"
-          beforeRequest: "randomPopularId"
-      count: 1000
+          beforeRequest: "getRandomPopularId"
+      count: 100
     weight: 4

@@ -21,7 +21,6 @@ const queryRandomId = async () => {
 
   const text = 'SELECT * FROM restaurants WHERE place_id = ($1)';
   const values = [randomId];
-  // client.query("SELECT * FROM stooges WHERE name IN ($1, $2, $3)", ['larry', 'curly', 'moe'], ...);
 
   await client.query(text, values);
   const endTime = new Date();

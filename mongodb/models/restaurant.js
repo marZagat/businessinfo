@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const databaseHost = process.env.DATABASE_HOST || 'localhost';
-mongoose.connect(`mongodb://${databaseHost}/businessinfo`);
+mongoose.connect(`mongodb://${databaseHost}/business_info_mongo_flat`);
 
 const restaurantSchema = mongoose.Schema({
   place_id: { type: String, unique: true },

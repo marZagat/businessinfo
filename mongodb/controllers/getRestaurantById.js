@@ -2,9 +2,11 @@ const redis = require('redis');
 const { promisify } = require('util');
 const Promise = require('bluebird');
 
+const redisHost = process.env.REDIS_HOST || 'localhost';
+
 const database = require('../models/restaurant.js');
 
-const client = redis.createClient();
+const client = redis.createClient({ host: redisHost });
 
 const getAsync = promisify(client.get).bind(client);
 const setexAsync = promisify(client.setex).bind(client);

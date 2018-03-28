@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 
 const common = {
   context: __dirname + '/client',
@@ -29,6 +31,9 @@ const client = {
     path: __dirname + '/public',
     filename: 'app.js',
   },
+  plugins: [
+    new Dotenv(),
+  ],
 };
 
 const server = {

@@ -3,7 +3,6 @@ import axios from 'axios';
 import Promise from 'bluebird';
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-require("babel-polyfill");
 
 class BusinessInfo extends React.Component {
   constructor(props) {

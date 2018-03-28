@@ -11,7 +11,7 @@
     "build": "webpack -p",
     "react-dev": "webpack --watch",
     "start": "node ./server/server.js",
-    "artillery": "artillery run ./loadTest/microTest.yml",
+    "artillery": "artillery run ./loadTest/microTest.yml"
   },
   "repository": {
     "type": "git",

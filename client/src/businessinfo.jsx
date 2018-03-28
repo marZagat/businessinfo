@@ -11,7 +11,7 @@ class BusinessInfo extends React.Component {
     this.state = {
       restaurant: this.props.restaurant,
     };
-    getRestaurantData(props.id);
+    this.getRestaurantData(props.id);
   }
 
   getRestaurantData(id) {

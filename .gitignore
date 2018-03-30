@@ -1,5 +1,3 @@
-#docker persistent storage
-
 #webpack output
 bundle.js
 bundle.js.map
@@ -74,3 +72,7 @@ newrelic.js
 
 #redis dump
 *.rdb
+
+#webpack bundles
+public/app-server.js
+public/app.js

@@ -7,7 +7,7 @@ const generateRestaurant = require('./generateFlatData.js');
 
 const databaseHost = process.env.DATABASE_HOST || 'localhost:27017';
 const batchSize = parseInt(process.env.BATCH_SIZE, 10) || 10000;
-const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 100000;
+const numRecords = parseInt(process.env.NUM_RECORDS, 10) || 10000000;
 const database = process.env.DATABASE || 'business_info_mongo_flat';
 const collectionName = process.env.COLLECTION_NAME || 'restaurants';
 

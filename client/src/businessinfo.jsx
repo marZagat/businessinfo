@@ -3,7 +3,6 @@ import axios from 'axios';
 import Promise from 'bluebird';
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-require("babel-polyfill");
 
 class BusinessInfo extends React.Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class BusinessInfo extends React.Component {
     this.state = {
       restaurant: this.props.restaurant,
     };
-    getRestaurantData(props.id);
+    this.getRestaurantData(props.id);
   }
 
   getRestaurantData(id) {

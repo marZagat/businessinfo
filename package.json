@@ -6,13 +6,12 @@
   "scripts": {
     "database": "mongod",
     "redis": "redis-server",
-    "seed": "node mongodb/data/seedDatabase.js",
+    "seed": "node mongodb/data/flatSchema/seedFlatDatabase.js",
     "test": "jest",
     "build": "webpack -p",
     "react-dev": "webpack --watch",
     "start": "node ./server/server.js",
-    "artillery": "artillery run ./loadTest/microTest.yml",
-    "docker-start": "DATABASE_HOST=database node mongodb/controllers/seed_database.js && DATABASE_HOST=database node server/index.js"
+    "artillery": "artillery run ./loadTest/microTest.yml"
   },
   "repository": {
     "type": "git",
@@ -53,6 +52,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
+    "dotenv-webpack": "^1.5.5",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "google-map-react": "^0.34.0",

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Promise from 'bluebird';
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-const businessInfoHost = process.env.BUSINESS_INFO_HOST || 'localhost';
+const businessInfoHost = process.env.BUSINESS_INFO_HOST || 'ec2-52-53-104-137.us-west-1.compute.amazonaws.com';
 
 class BusinessInfo extends React.Component {
   constructor(props) {

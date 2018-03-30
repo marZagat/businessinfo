@@ -3,7 +3,7 @@ import axios from 'axios';
 import Promise from 'bluebird';
 import { InfoList } from './InfoList.jsx';
 import MapContainer from './MapContainer.jsx';
-const host = process.env.HOST || 'localhost';
+const businessInfoHost = process.env.BUSINESS_INFO_HOST || 'localhost';
 
 class BusinessInfo extends React.Component {
   constructor(props) {
@@ -15,9 +15,10 @@ class BusinessInfo extends React.Component {
   }
 
   getRestaurantData(id) {
-    axios.get(`http://${host}:3003/api/restaurants/${id}/businessinfo`)
+    console.log(`In React component, the host to do the axios get is ${businessInfoHost}`);
+    axios.get(`http://${businessInfoHost}:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
-        console.log('received:', response);
+        console.log('received:', response.data);
         this.setState({ restaurant: response.data });
       }).catch((err) => {
         console.error('Failed to fetch restaurant data from server:', err);

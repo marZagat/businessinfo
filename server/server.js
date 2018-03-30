@@ -26,5 +26,5 @@ app.use('/restaurants', restaurantsRouter);
 app.use('/api/restaurants', restaurantsApiRouter);
 
 app.listen(port, () => {
-  console.log(`server running at: http://${businessInfoHost}:${port}`);
+  console.log(`Business Info microservice server running at: http://${businessInfoHost}:${port}`);
 });

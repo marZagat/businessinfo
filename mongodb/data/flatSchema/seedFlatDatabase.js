@@ -30,6 +30,7 @@ const seedBatch = (minId, maxId, collection) => {
     }
     try {
       const savedRestaurants = await collection.insertMany(restaurantRows);
+      await collection.createIndex({ place_id: 1 }, { unique: true });
       resolve(savedRestaurants);
     } catch (error) {
       console.error(error);
@@ -90,7 +91,7 @@ if (cluster.isMaster) {
     try {
       console.log(`Master ${process.pid} indexing`);
       const { client, collection } = await connectToDb();
-      await indexDb(collection);
+      // await indexDb(collection);
       console.log('Done indexing');
       client.close();
       process.exit();

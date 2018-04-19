@@ -11,8 +11,13 @@
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="http://localhost:3003/app.js"></script>
   <script>
+    var restaurantId = location.pathname.split('restaurants/')[1];
+    console.log('restaurant id is', restaurantId)
+    if (restaurantId[restaurantId.length - 1] === '/') {
+      restaurantId = restaurantId.substring(0, restaurantId.length - 1);
+    }
     ReactDOM.render(
-      React.createElement(BusinessInfo, {id: '50'}, null),
+      React.createElement(BusinessInfo, {id: restaurantId}, null),
       document.getElementById('businessinfo')
     );
   </script>

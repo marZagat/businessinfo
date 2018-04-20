@@ -1,10 +1,10 @@
 const getRandomNormalId = (requestParams, context, ee, next) => {
-  context.vars.id = Math.floor((Math.random() * 9999999) + 1);
+  context.vars.id = Math.floor((Math.random() * 99999) + 1);
   return next();
 };
 
 const getRandomPopularId = (requestParams, context, ee, next) => {
-  context.vars.id = Math.floor((Math.random() * 10000) + 1);
+  context.vars.id = Math.floor((Math.random() * 1000) + 1);
   return next();
 };
 

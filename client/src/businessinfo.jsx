@@ -16,7 +16,7 @@ class BusinessInfo extends React.Component {
   getRestaurantData(id) {
     axios.get(`http://localhost:3003/api/restaurants/${id}/businessinfo`)
       .then((response) => {
-        console.log('received:', response);
+        // console.log('received:', response);
         this.setState({ restaurant: response.data });
       }).catch((err) => {
         console.error('Failed to fetch restaurant data from server:', err);

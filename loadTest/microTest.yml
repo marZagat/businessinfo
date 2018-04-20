@@ -4,8 +4,13 @@ config:
     timeout: 2
     pool: 10
   phases: 
-    - duration: 20
-      arrivalRate: 20
+    - duration: 60
+      arrivalRate: 5
+      rampTo: 30
+      name: "Warm up phase"
+    - duration: 300
+      arrivalRate: 30
+      name: "Sustained Max Load"
   processor: "./loadTestHelpers.js"
 scenarios:
   - flow:
@@ -21,4 +26,4 @@ scenarios:
           url: "/api/restaurants/{{ id }}/businessinfo"
           beforeRequest: "getRandomPopularId"
       count: 100
-    weight: 4
+    weight: 1

@@ -1,6 +1,6 @@
 require('newrelic');
 const express = require('express');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 
@@ -10,7 +10,7 @@ const port = process.env.PORT || 3003;
 const restaurantsRouter = require('./routers/restaurants.js');
 const restaurantsApiRouter = require('./routers/restaurants_api.js');
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(cors());
 
 app.use(express.static(path.join(__dirname, '../public/')));
